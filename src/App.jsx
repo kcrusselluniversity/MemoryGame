@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import Gameboard from './Gameboard'
 import './App.css'
 

@@ -1,9 +1,9 @@
 import { useState } from "react"
 
 export default function Card({ name, imgUrl }) {
-    const [visible, setVisible] = useState()
+    const [visible, setVisible] = useState(false)
 
-    const handleClick = () => setVisible(visible => !visible)
+    function handleClick() { setVisible(visible => !visible) }
 
     return (
         <div className="card" onClick={handleClick}>
