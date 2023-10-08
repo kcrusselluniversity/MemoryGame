@@ -18,7 +18,9 @@ export default function usePokemonList() {
                 const { other } = data.sprites;
                 const imgUrl = other["official-artwork"]["front_default"];
 
-                const pokemon = {name, imgUrl}
+                // A disabled property of the pokemon to indicate whether
+                // that pokemons pair has been found
+                const pokemon = {name, imgUrl, disabled: false}
                 
                 return pokemon
             })
