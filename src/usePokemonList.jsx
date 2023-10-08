@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+// TODO: Take into account how rand may produce the same number so need to 
+// ensure each random number is unique
 
-const DESIRED_QUANTITY = 6;
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
+const DESIRED_QUANTITY = 12;
 const NUMBER_OF_POKEMON = 150;
 
 export default function usePokemonList() {
@@ -20,7 +24,14 @@ export default function usePokemonList() {
 
                 // A disabled property of the pokemon to indicate whether
                 // that pokemons pair has been found
-                const pokemon = {name, imgUrl, disabled: false}
+                const pokemon = {
+                    name, 
+                    imgUrl, 
+                    disabled: false, 
+                    visible: false, 
+                }
+
+
                 
                 return pokemon
             })

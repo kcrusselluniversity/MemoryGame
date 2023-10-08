@@ -1,31 +1,52 @@
+// TODO: Handle what happens if the user clicks on a card before the 500ms is 
+// up as currently it lets you reveal however many you want
+// Add an onLoad prop to the img tag and have a count in the App that 
+// shows loading until all X cards have been fully loaded
 import { useState, useRef, useEffect } from "react"
 
-export default function Card({ name, imgUrl, disabled, firstCard, setFirstCard, secondCard, setSecondCard, gameList, setGameList, lastCardClickedRef }) {
-    const [visible, setVisible] = useState(false)
+export default function Card({ name, imgUrl, disabled, visible, id, firstCard, setFirstCard, secondCard, setSecondCard, gameList, setGameList, lastCardClickedRef, seenPokemon, setSeenPokemon }) {
 
-    function handleClick(event) { 
-        console.log(lastCardClickedRef.current)
-        setVisible(visible => !visible) 
-        
-        if (secondCard) {
-            // Compare the two cards
-            if (firstCard === name) {
-                // disable the pair of cards
-                const newList = [...gameList].map(pokemon => {
-                    if(pokemon.name === name) { pokemon.disabled = true }
-                    return pokemon
+    function handleClick(event) {  
+
+        // Make visible and disable functionality
+        const updatedGameList = gameList.map(pokemon => {
+            pokemon.disabled = true
+            if (pokemon.id === id) pokemon.visible = true
+            return pokemon
+        })
+
+        setGameList(updatedGameList)
+
+        setTimeout(() => {
+            
+            if (secondCard) {
+                // Compare the two cards
+                if (firstCard === name && !seenPokemon.includes(name)) {
+                    // Add the pokemon to the seen state
+                    setSeenPokemon([...seenPokemon, name])
+                } 
+                setSecondCard(false)
+                
+                // Hide all unseen pokemon
+                const updatedGameList = gameList.map(pokemon => {
+                    
+                    if (!seenPokemon.includes(pokemon.name)) pokemon.visible = false;
+                    
+                    return pokemon;
                 })
-                setGameList(newList)
-            } else {
-                // setVisible(false)
-                // lastCardClickedRef.current.class = "hidden";
+                
+                setGameList(updatedGameList)
+                // Reenable cards
+                setGameList(gameList.map(pokemon => {return {...pokemon, disabled: false}})) //DUPLICATE CODE :(
             }
-            setSecondCard(false)
-        }
+        }, 500)
         
+
+        // Reenable cards
+        setGameList(gameList.map(pokemon => {return {...pokemon, disabled: false}}))
+
         setFirstCard(name)
         setSecondCard(true);
-        lastCardClickedRef.current = event.target; 
     }
 
     return (
