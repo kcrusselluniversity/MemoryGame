@@ -1,24 +1,24 @@
 // TODO: FIX REPEATED CODE USING HELPER FUNCTION updateGameList
+// TODO: FIX BUG OF SEEN POKEMON CARDS STILL CLICKABLE
 // TODO: FIX USING CSS TO CONTROL EVERYTHING :(
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameList from "./useGameList";
 import stopWatch from "./utils/stopwatch";
 
-const DESIRED_QUANTITY = 4
 const EASY_MODE = 4;
-const MEDIUM_MODE = 8;
+const MEDIUM_MODE = 6;
 const HARD_MODE = 12;
 
 export default function Gameboard() {
-    const [gameList, setGameList] = useGameList(DESIRED_QUANTITY);
+    const [cardQuantity, setCardQuantity] = useState(EASY_MODE);
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
     const [timer, setTimer] = useState([]);
     const [noClickEvents, setNoClickEvents] = useState(true);
     const [loadedImageCount, setLoadedImageCount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [cardQuantity, setCardQuantity] = useState(EASY_MODE);
+    const [gameList, setGameList] = useGameList(cardQuantity);
 
     function gameboardClassName(){
         if (!isLoaded) return 'gameboard displayNone'
@@ -26,13 +26,14 @@ export default function Gameboard() {
         return 'gameboard'
         
     }
+
     function handleStart() {
         setNoClickEvents(false)
         setTimer([...timer, new Date()])
     }
 
     useEffect(() => {
-        if (loadedImageCount === 2 * DESIRED_QUANTITY) {
+        if (loadedImageCount === 2 * cardQuantity) {
             setIsLoaded(true)
         }
     }, [loadedImageCount])  
@@ -118,9 +119,9 @@ export default function Gameboard() {
         <>
             <button className={isLoaded ? null : 'visibilityNone'} style={{fontSize:'1.5rem'}} onClick={handleStart}>Start</button>
             <div className={isLoaded ? 'gameMode' : 'visibilityNone'}>
-                <button onClick={()=>{}}>Easy</button>
-                <button onClick={()=>{}}>Medium</button>
-                <button onClick={()=>{}}>Hard</button>
+                <button onClick={()=>{setCardQuantity(EASY_MODE)}}>Easy</button>
+                <button onClick={()=>{setCardQuantity(MEDIUM_MODE)}}>Medium</button>
+                <button onClick={()=>{setCardQuantity(HARD_MODE)}}>Hard</button>
             </div>
             <div className={isLoaded ? "displayNone" : "spinnerContainer"}><div className="loadingSpinner"></div></div>
             <div className={gameboardClassName()}>

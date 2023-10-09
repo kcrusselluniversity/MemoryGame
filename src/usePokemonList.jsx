@@ -5,14 +5,14 @@ import randomNumberArray from "./utils/randomNumberArray";
 
 const NUMBER_OF_POKEMON = 150;
 
-export default function usePokemonList(DESIRED_QUANTITY) {
+export default function usePokemonList(cardQuantity) {
     const [pokemonArray, setPokemonArray] = useState([])
     const [loading, setLoading] = useState(true);
 
-    const randomIndexesArray = randomNumberArray(NUMBER_OF_POKEMON, DESIRED_QUANTITY);
+    const randomIndexesArray = randomNumberArray(NUMBER_OF_POKEMON, cardQuantity);
 
     useEffect(() => {
-        const promiseArray = Array.from({ length: DESIRED_QUANTITY }).map((_, index) => {
+        const promiseArray = Array.from({ length: cardQuantity }).map((_, index) => {
 
             return fetch(`https://pokeapi.co/api/v2/pokemon/${randomIndexesArray[index]}`)
             .then(response => response.json())
@@ -38,7 +38,7 @@ export default function usePokemonList(DESIRED_QUANTITY) {
             setLoading(false)
         });
         
-    }, [])
+    }, [cardQuantity])
 
     return [pokemonArray, loading]
 }
