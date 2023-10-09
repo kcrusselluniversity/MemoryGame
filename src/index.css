@@ -12,6 +12,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --spinner-size: 4rem;
+  --card-size: 200px;
+  --grid-width: 220px;
+  --grid-height: 220px;
+}
+
+#root {
+  display: grid;
+  grid-template-rows: 100px auto;
+  height: 100vh;
+  place-items: center;
+}
+
+* {
+  padding: 0px;
 }
 
 a {
@@ -25,16 +41,17 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-
   min-width: 320px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin: 0px;
 }
 
 button {
@@ -82,12 +99,39 @@ button:focus-visible {
 }
 
 .gameboard {
-  width: 100vw;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem
+  align-content: center;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .hidden {
   display: none;
+}
+
+.loadingSpinner {
+  border: 6px solid white;
+  border-top: 6px solid rgb(177, 177, 255);
+  border-radius: 100%;
+  height: var(--spinner-size);
+  width: var(--spinner-size);
+  box-shadow: 0 0 6px white; 
+  animation: spin 1s linear infinite;
+}
+
+.spinnerContainer {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -40,10 +40,10 @@ export default function Gameboard() {
         seenPokemon, 
         setSeenPokemon}
 
-    if (gameList.length === 0) return <h2>Loading ...</h2>
+    if (gameList.length === 0) return <div className="spinnerContainer"><div className="loadingSpinner"></div></div>
 
     if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
-        return <h1 style={{marginTop: '6rem', fontSize: '10rem'}}>You Won!</h1>
+        return <h1 style={{fontSize: '10rem'}}>You Won!</h1>
     }
     
     return (

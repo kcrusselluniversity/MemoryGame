@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-const DESIRED_QUANTITY = 12;
+const DESIRED_QUANTITY = 6;
 const NUMBER_OF_POKEMON = 150;
 
 export default function usePokemonList() {
