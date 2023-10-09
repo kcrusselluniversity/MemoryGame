@@ -21,7 +21,7 @@
 
 #root {
   display: grid;
-  grid-template-rows: 100px auto;
+  grid-template-rows: 100px 100px auto;
   height: 100vh;
   place-items: center;
 }
@@ -134,4 +134,8 @@ button:focus-visible {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.noClick {
+  pointer-events: none;
 }

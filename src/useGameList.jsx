@@ -19,5 +19,5 @@ export default function useGameList() {
         }
     }, [loading, pokemonArray])
 
-    return [gameList, setGameList]
+    return [gameList, setGameList, loading]
 }

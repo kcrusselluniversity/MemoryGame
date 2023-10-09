@@ -1,14 +1,63 @@
+// TODO: FIX REPEATED CODE
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameList from "./useGameList";
+import stopWatch from "./utils/stopwatch";
 
 export default function Gameboard() {
-    const [gameList, setGameList] = useGameList();
-    
-    const [firstCard, setFirstCard] = useState(null);
-    const [secondCard, setSecondCard] = useState(null);
-    const [activeCards, setActiveCards] = useState([null, null]);
+    const [gameList, setGameList, loading] = useGameList();
+    const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
+    const [timer, setTimer] = useState([]);
+    const [noClickEvents, setNoClickEvents] = useState(true);
+
+    function handleStart() {
+        setNoClickEvents(false)
+        setTimer([...timer, new Date()])
+    }
+
+    useEffect(() => {
+        console.log(activeCards)
+        if (activeCards.length == 1) {
+            const activePokemon = activeCards[0]
+            
+            // Reenable all cards except for the active card
+            const updatedGameList = gameList.map(pokemon => {
+                pokemon.disabled = pokemon.id === activePokemon.id ? true : false
+                return pokemon
+            })
+            setGameList(updatedGameList)
+        }
+
+        if (activeCards.length == 2) {        
+            setTimeout(() => {
+                const [firstCard, secondCard] = activeCards;
+                if (firstCard.name === secondCard.name) {
+                    // Add this pokemon to seen
+                    setSeenPokemon([...seenPokemon, firstCard.name]);
+
+                    // Reenable all cards except for the two active cards (as they match)
+                    const updatedGameList = gameList.map(pokemon => {
+                        if (pokemon.id != firstCard.id && pokemon.id != secondCard.id && !seenPokemon.find(seen => seen == pokemon.name)) {
+                            pokemon.disabled = false;
+                            pokemon.visible = false;
+                        }    
+                        return pokemon
+                    })
+                    setGameList(updatedGameList);               
+                }
+
+                const updatedGameList = gameList.map(pokemon => {
+                    pokemon.disabled = false;
+                    if (!seenPokemon.find(seen => seen == pokemon.name)) pokemon.visible = false;    
+                    return pokemon
+                })
+
+                setGameList(updatedGameList);   
+                setActiveCards([]);
+            }, 600)
+        }
+    }, [activeCards])
 
     useEffect(() => {
         // Disable seen Pokemon and let them be visible anytime seenPokemon
@@ -23,24 +72,34 @@ export default function Gameboard() {
         setGameList(updatedList)
     }, [seenPokemon])
 
+    useEffect(() => {
+        console.log("SeenPokemon updated")
+        if ((seenPokemon.length === gameList.length/2) && seenPokemon.length > 0) {
+            setTimer([...timer, new Date()])
+        }
+    }, [seenPokemon])
+
+
     const stateProps = {
-        firstCard, 
-        setFirstCard, 
-        secondCard, 
-        setSecondCard, 
+        activeCards, 
+        setActiveCards,
         gameList,
-        setGameList,
-        seenPokemon, 
-        setSeenPokemon}
+        setGameList}
 
     if (gameList.length === 0) return <div className="spinnerContainer"><div className="loadingSpinner"></div></div>
 
     if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
-        return <h1 style={{fontSize: '10rem'}}>You Won!</h1>
+        return (
+        <>
+            <h1 style={{fontSize: '10rem'}}>You Won!</h1>
+            <h1>{stopWatch(timer[1], timer[0])}</h1>
+        </>)
     }
     
     return (
-        <div className="gameboard">
+        <>
+        <button style={{fontSize:'1.5rem'}} onClick={handleStart}>Start</button>
+        <div className={noClickEvents ? 'gameboard noClick' : 'gameboard'}>
             {gameList.map((pokemon, index) => 
                 <Card 
                     key={index} 
@@ -52,5 +111,6 @@ export default function Gameboard() {
                     {...stateProps}
                 />)}
         </div>
+        </>
     )
 }
