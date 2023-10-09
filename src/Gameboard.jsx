@@ -1,4 +1,4 @@
-// TODO: FIX REPEATED CODE
+// TODO: FIX REPEATED CODE USING HELPER FUNCTION updateGameList
 // TODO: FIX USING CSS TO CONTROL EVERYTHING :(
 import { useEffect, useState } from "react";
 import Card from "./Card";
@@ -93,7 +93,7 @@ export default function Gameboard() {
 
     useEffect(() => {
         if ((seenPokemon.length === gameList.length/2) && seenPokemon.length > 0) {
-            setTimer([...timer, new Date()])
+            setTimer(timer => [...timer, new Date()])
         }
     }, [seenPokemon])
 
@@ -105,8 +105,6 @@ export default function Gameboard() {
         loadedImageCount,
         setLoadedImageCount}
 
-    // if (!isLoaded) return <div className="spinnerContainer"><div className="loadingSpinner"></div></div>
-
     if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
         return (
         <>
@@ -117,12 +115,12 @@ export default function Gameboard() {
     
     return (
         <>
-            <button className={isLoaded ? null : 'visibilityNone'}style={{fontSize:'1.5rem'}} onClick={handleStart}>Start</button>
+            <button className={isLoaded ? null : 'visibilityNone'} style={{fontSize:'1.5rem'}} onClick={handleStart}>Start</button>
             <div className={isLoaded ? "displayNone" : "spinnerContainer"}><div className="loadingSpinner"></div></div>
             <div className={gameboardClassName()}>
-                {gameList.map((pokemon, index) => 
+                {gameList.map(pokemon => 
                     <Card 
-                        key={index} 
+                        key={pokemon.id} 
                         name={pokemon.name} 
                         imgUrl={pokemon.imgUrl} 
                         disabled={pokemon.disabled}
