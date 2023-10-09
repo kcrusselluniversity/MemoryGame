@@ -5,7 +5,10 @@ import Card from "./Card";
 import useGameList from "./useGameList";
 import stopWatch from "./utils/stopwatch";
 
-const DESIRED_QUANTITY = 4;
+const DESIRED_QUANTITY = 4
+const EASY_MODE = 4;
+const MEDIUM_MODE = 8;
+const HARD_MODE = 12;
 
 export default function Gameboard() {
     const [gameList, setGameList] = useGameList(DESIRED_QUANTITY);
@@ -15,6 +18,7 @@ export default function Gameboard() {
     const [noClickEvents, setNoClickEvents] = useState(true);
     const [loadedImageCount, setLoadedImageCount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [cardQuantity, setCardQuantity] = useState(EASY_MODE);
 
     function gameboardClassName(){
         if (!isLoaded) return 'gameboard displayNone'
@@ -113,6 +117,11 @@ export default function Gameboard() {
     return (
         <>
             <button className={isLoaded ? null : 'visibilityNone'} style={{fontSize:'1.5rem'}} onClick={handleStart}>Start</button>
+            <div className={isLoaded ? 'gameMode' : 'visibilityNone'}>
+                <button onClick={()=>{}}>Easy</button>
+                <button onClick={()=>{}}>Medium</button>
+                <button onClick={()=>{}}>Hard</button>
+            </div>
             <div className={isLoaded ? "displayNone" : "spinnerContainer"}><div className="loadingSpinner"></div></div>
             <div className={gameboardClassName()}>
                 {gameList.map(pokemon => 
