@@ -1,5 +1,3 @@
-// TODO: Take into account how rand may produce the same number so need to 
-// ensure each random number is unique
 import { useEffect, useState } from "react";
 import randomNumberArray from "./utils/randomNumberArray";
 
