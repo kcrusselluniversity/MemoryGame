@@ -15,8 +15,6 @@ export default function Gameboard() {
     const [noClickEvents, setNoClickEvents] = useState(true);
     const [loadedImageCount, setLoadedImageCount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
-    
-    console.log(gameList)
 
     function gameboardClassName(){
         if (!isLoaded) return 'gameboard displayNone'
@@ -30,7 +28,6 @@ export default function Gameboard() {
     }
 
     useEffect(() => {
-        console.log(loadedImageCount)
         if (loadedImageCount === 2 * DESIRED_QUANTITY) {
             setIsLoaded(true)
         }

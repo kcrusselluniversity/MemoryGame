@@ -1,17 +1,20 @@
 // TODO: Take into account how rand may produce the same number so need to 
 // ensure each random number is unique
 import { useEffect, useState } from "react";
+import randomNumberArray from "./utils/randomNumberArray";
+
 const NUMBER_OF_POKEMON = 150;
 
 export default function usePokemonList(DESIRED_QUANTITY) {
     const [pokemonArray, setPokemonArray] = useState([])
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const promiseArray = Array.from({ length: DESIRED_QUANTITY }).map(() => {
-            const rand = Math.ceil(Math.random() * NUMBER_OF_POKEMON);
+    const randomIndexesArray = randomNumberArray(NUMBER_OF_POKEMON, DESIRED_QUANTITY);
 
-            return fetch(`https://pokeapi.co/api/v2/pokemon/${rand}`)
+    useEffect(() => {
+        const promiseArray = Array.from({ length: DESIRED_QUANTITY }).map((_, index) => {
+
+            return fetch(`https://pokeapi.co/api/v2/pokemon/${randomIndexesArray[index]}`)
             .then(response => response.json())
             .then(data => {
                 const { name } = data;
