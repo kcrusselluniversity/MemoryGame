@@ -3,8 +3,8 @@ import usePokemonList from "./usePokemonList";
 import { shuffle } from "lodash";
 import { v4 as uuidv4 } from 'uuid';
 
-export default function useGameList() {
-    const [pokemonArray, loading] = usePokemonList();
+export default function useGameList(DESIRED_QUANTITY) {
+    const [pokemonArray, loading] = usePokemonList(DESIRED_QUANTITY);
     const [gameList, setGameList] = useState([]);
 
     useEffect(() => {
@@ -19,5 +19,5 @@ export default function useGameList() {
         }
     }, [loading, pokemonArray])
 
-    return [gameList, setGameList, loading]
+    return [gameList, setGameList]
 }

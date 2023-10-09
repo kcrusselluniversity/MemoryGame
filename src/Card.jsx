@@ -4,7 +4,8 @@
 export default function Card({ 
     name, imgUrl, disabled, visible, id, 
     activeCards, setActiveCards, 
-    gameList, setGameList}) {
+    gameList, setGameList,
+    loadedImageCount, setLoadedImageCount}) {
     function handleClick() { 
         if (disabled) return;
         
@@ -26,7 +27,7 @@ export default function Card({
         <div className="card" onClick={handleClick}>
             <div className={visible ? null : 'hidden'}>
                 <h3 style={{margin: '0px', paddingBottom: '6px', color: 'black'}}>{name}</h3>
-                <img src={imgUrl} style={{height: '150px', width: '150px'}}/>
+                <img onLoad={() => {setLoadedImageCount(loadedImageCount => loadedImageCount + 1)}}src={imgUrl} style={{height: '150px', width: '150px'}}/>
             </div>
         </div>
     )

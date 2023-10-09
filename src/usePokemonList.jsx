@@ -1,11 +1,9 @@
 // TODO: Take into account how rand may produce the same number so need to 
 // ensure each random number is unique
 import { useEffect, useState } from "react";
-
-const DESIRED_QUANTITY = 6;
 const NUMBER_OF_POKEMON = 150;
 
-export default function usePokemonList() {
+export default function usePokemonList(DESIRED_QUANTITY) {
     const [pokemonArray, setPokemonArray] = useState([])
     const [loading, setLoading] = useState(true);
 

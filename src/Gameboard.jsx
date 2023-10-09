@@ -1,23 +1,42 @@
 // TODO: FIX REPEATED CODE
+// TODO: FIX USING CSS TO CONTROL EVERYTHING :(
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameList from "./useGameList";
 import stopWatch from "./utils/stopwatch";
 
+const DESIRED_QUANTITY = 4;
+
 export default function Gameboard() {
-    const [gameList, setGameList, loading] = useGameList();
+    const [gameList, setGameList] = useGameList(DESIRED_QUANTITY);
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
     const [timer, setTimer] = useState([]);
     const [noClickEvents, setNoClickEvents] = useState(true);
+    const [loadedImageCount, setLoadedImageCount] = useState(0);
+    const [isLoaded, setIsLoaded] = useState(false);
+    
+    console.log(gameList)
 
+    function gameboardClassName(){
+        if (!isLoaded) return 'gameboard displayNone'
+        if (noClickEvents) return 'gameboard noClick'
+        return 'gameboard'
+        
+    }
     function handleStart() {
         setNoClickEvents(false)
         setTimer([...timer, new Date()])
     }
 
     useEffect(() => {
-        console.log(activeCards)
+        console.log(loadedImageCount)
+        if (loadedImageCount === 2 * DESIRED_QUANTITY) {
+            setIsLoaded(true)
+        }
+    }, [loadedImageCount])  
+
+    useEffect(() => {
         if (activeCards.length == 1) {
             const activePokemon = activeCards[0]
             
@@ -73,20 +92,20 @@ export default function Gameboard() {
     }, [seenPokemon])
 
     useEffect(() => {
-        console.log("SeenPokemon updated")
         if ((seenPokemon.length === gameList.length/2) && seenPokemon.length > 0) {
             setTimer([...timer, new Date()])
         }
     }, [seenPokemon])
 
-
     const stateProps = {
         activeCards, 
         setActiveCards,
         gameList,
-        setGameList}
+        setGameList,
+        loadedImageCount,
+        setLoadedImageCount}
 
-    if (gameList.length === 0) return <div className="spinnerContainer"><div className="loadingSpinner"></div></div>
+    // if (!isLoaded) return <div className="spinnerContainer"><div className="loadingSpinner"></div></div>
 
     if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
         return (
@@ -98,19 +117,19 @@ export default function Gameboard() {
     
     return (
         <>
-        <button style={{fontSize:'1.5rem'}} onClick={handleStart}>Start</button>
-        <div className={noClickEvents ? 'gameboard noClick' : 'gameboard'}>
-            {gameList.map((pokemon, index) => 
-                <Card 
-                    key={index} 
-                    name={pokemon.name} 
-                    imgUrl={pokemon.imgUrl} 
-                    disabled={pokemon.disabled}
-                    visible={pokemon.visible}
-                    id={pokemon.id}
-                    {...stateProps}
-                />)}
-        </div>
-        </>
-    )
+            <button className={isLoaded ? null : 'visibilityNone'}style={{fontSize:'1.5rem'}} onClick={handleStart}>Start</button>
+            <div className={isLoaded ? "displayNone" : "spinnerContainer"}><div className="loadingSpinner"></div></div>
+            <div className={gameboardClassName()}>
+                {gameList.map((pokemon, index) => 
+                    <Card 
+                        key={index} 
+                        name={pokemon.name} 
+                        imgUrl={pokemon.imgUrl} 
+                        disabled={pokemon.disabled}
+                        visible={pokemon.visible}
+                        id={pokemon.id}
+                        {...stateProps}
+                    />)}
+            </div>
+        </>)         
 }
