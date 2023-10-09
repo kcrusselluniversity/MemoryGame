@@ -1,13 +1,15 @@
 // TODO: Handle what happens if the user clicks on a card before the 500ms is 
 // up as currently it lets you reveal however many you want
-// Add an onLoad prop to the img tag and have a count in the App that 
+
+// TODO: Add an onLoad prop to the img tag and have a count in the App that 
 // shows loading until all X cards have been fully loaded
-import { useState, useRef, useEffect } from "react"
 
-export default function Card({ name, imgUrl, disabled, visible, id, firstCard, setFirstCard, secondCard, setSecondCard, gameList, setGameList, lastCardClickedRef, seenPokemon, setSeenPokemon }) {
-
-    function handleClick(event) {  
-
+export default function Card({ 
+    name, imgUrl, disabled, visible, id, 
+    firstCard, setFirstCard, secondCard, setSecondCard, 
+    gameList, setGameList, seenPokemon, setSeenPokemon 
+}) {
+    function handleClick() { 
         // Make visible and disable functionality
         const updatedGameList = gameList.map(pokemon => {
             pokemon.disabled = true

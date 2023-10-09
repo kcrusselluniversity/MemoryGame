@@ -1,6 +1,4 @@
-// Change the loading h2 element to be a div with a class of 'loading' that 
-// makes it a spinning wheel 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameList from "./useGameList";
 
@@ -9,14 +7,12 @@ export default function Gameboard() {
     
     const [firstCard, setFirstCard] = useState(null);
     const [secondCard, setSecondCard] = useState(null);
+    const [activeCards, setActiveCards] = useState([null, null]);
     const [seenPokemon, setSeenPokemon] = useState([]);
-    const [score, setScore] = useState(0);
-    const lastCardClickedRef = useRef('None');
-    
-    console.log(gameList)
 
     useEffect(() => {
-        // Disable seen Pokemon and let them be visible
+        // Disable seen Pokemon and let them be visible anytime seenPokemon
+        // is updated
         const updatedList = gameList.map(pokemon => {
             if (seenPokemon.includes(pokemon.name)) {
                 pokemon.visible = true;
@@ -32,11 +28,8 @@ export default function Gameboard() {
         setFirstCard, 
         secondCard, 
         setSecondCard, 
-        score, 
-        setScore, 
         gameList,
         setGameList,
-        lastCardClickedRef,
         seenPokemon, 
         setSeenPokemon}
 
