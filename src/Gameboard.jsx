@@ -1,33 +1,34 @@
 // TODO: FIX REPEATED CODE USING HELPER FUNCTION updateGameList
 // TODO: FIX BUG OF SEEN POKEMON CARDS STILL CLICKABLE
 // TODO: FIX USING CSS TO CONTROL EVERYTHING :(
+// TODO: FIX CHANGING MODES DOESNT SHOW RELOAD SPINNER
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameList from "./useGameList";
-import stopWatch from "./utils/stopwatch";
 
 const EASY_MODE = 4;
 const MEDIUM_MODE = 6;
 const HARD_MODE = 12;
 
-export default function Gameboard() {
-    const [cardQuantity, setCardQuantity] = useState(EASY_MODE);
+export default function Gameboard({ player1, player2, timer, setTimer, setGameOver, currentPlayer }) {
+    const [cardQuantity, setCardQuantity] = useState(MEDIUM_MODE);
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
-    const [timer, setTimer] = useState([]);
+
     const [noClickEvents, setNoClickEvents] = useState(true);
     const [loadedImageCount, setLoadedImageCount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
     const [gameList, setGameList] = useGameList(cardQuantity);
+    const [isGameStarted, setIsGameStarted] = useState(false);
 
     function gameboardClassName(){
         if (!isLoaded) return 'gameboard displayNone'
         if (noClickEvents) return 'gameboard noClick'
-        return 'gameboard'
-        
+        return 'gameboard'  
     }
 
     function handleStart() {
+        setIsGameStarted(true)
         setNoClickEvents(false)
         setTimer([...timer, new Date()])
     }
@@ -35,6 +36,8 @@ export default function Gameboard() {
     useEffect(() => {
         if (loadedImageCount === 2 * cardQuantity) {
             setIsLoaded(true)
+        } else {
+            setIsLoaded(false)
         }
     }, [loadedImageCount])  
 
@@ -76,7 +79,7 @@ export default function Gameboard() {
 
                 setGameList(updatedGameList);   
                 setActiveCards([]);
-            }, 600)
+            }, 300)
         }
     }, [activeCards])
 
@@ -96,6 +99,7 @@ export default function Gameboard() {
     useEffect(() => {
         if ((seenPokemon.length === gameList.length/2) && seenPokemon.length > 0) {
             setTimer(timer => [...timer, new Date()])
+            setGameOver(true)
         }
     }, [seenPokemon])
 
@@ -105,25 +109,35 @@ export default function Gameboard() {
         gameList,
         setGameList,
         loadedImageCount,
-        setLoadedImageCount}
+        setLoadedImageCount,
+        timer, setTimer,
+        setIsGameStarted, setNoClickEvents}
 
     if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
-        return (
-        <>
-            <h1 style={{fontSize: '10rem'}}>You Won!</h1>
-            <h1>{stopWatch(timer[1], timer[0])}</h1>
-        </>)
+        setGameOver(true)
     }
     
+    function handleModeButton(mode){
+        return () => {
+            setLoadedImageCount(0)
+            setCardQuantity(mode)
+        }
+    }
     return (
         <>
-            <button className={isLoaded ? null : 'visibilityNone'} style={{fontSize:'1.5rem'}} onClick={handleStart}>Start</button>
-            <div className={isLoaded ? 'gameMode' : 'visibilityNone'}>
-                <button onClick={()=>{setCardQuantity(EASY_MODE)}}>Easy</button>
-                <button onClick={()=>{setCardQuantity(MEDIUM_MODE)}}>Medium</button>
-                <button onClick={()=>{setCardQuantity(HARD_MODE)}}>Hard</button>
-            </div>
+            <h2 className={player1 === currentPlayer ? 'currentPlayer' : ''}>Player 1: {player1}</h2>
+            <h2 className={player2 === currentPlayer ? 'currentPlayer' : ''}>Player 2: {player2}</h2>
+            <button className={`${isLoaded ? 'startButton' : 'visibilityNone'} ${isLoaded && isGameStarted ? 'displayNone' : ''}`} 
+            onClick={handleStart}>Start</button>
+
             <div className={isLoaded ? "displayNone" : "spinnerContainer"}><div className="loadingSpinner"></div></div>
+            
+            <div className={`${isLoaded && !isGameStarted ? 'gameMode' : 'visibilityNone'} ${isLoaded && isGameStarted ? 'displayNone' : ''}`}>
+                <button onClick={handleModeButton(EASY_MODE)}>Easy</button>
+                <button onClick={handleModeButton(MEDIUM_MODE)}>Medium</button>
+                <button onClick={handleModeButton(HARD_MODE)}>Hard</button>
+            </div>
+
             <div className={gameboardClassName()}>
                 {gameList.map(pokemon => 
                     <Card 

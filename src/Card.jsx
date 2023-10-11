@@ -5,10 +5,13 @@ export default function Card({
     name, imgUrl, disabled, visible, id, 
     activeCards, setActiveCards, 
     gameList, setGameList,
-    loadedImageCount, setLoadedImageCount}) {
-    function handleClick() { 
+    setLoadedImageCount, 
+    timer, setTimer,
+    setIsGameStarted, setNoClickEvents }) {
+
+    function handleClick() {         
         if (disabled) return;
-        
+
         // Current pokemon
         const currentPokemon = gameList.find(pokemon => pokemon.id === id)
 

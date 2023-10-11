@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import randomNumberArray from "./utils/randomNumberArray";
 
-const NUMBER_OF_POKEMON = 150;
+const NUMBER_OF_POKEMON = 500;
 
 export default function usePokemonList(cardQuantity) {
     const [pokemonArray, setPokemonArray] = useState([])
     const [loading, setLoading] = useState(true);
-
+    
     const randomIndexesArray = randomNumberArray(NUMBER_OF_POKEMON, cardQuantity);
 
     useEffect(() => {
