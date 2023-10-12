@@ -5,20 +5,16 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameList from "./useGameList";
+import { EASY_MODE, MEDIUM_MODE, HARD_MODE } from "./App";
 
-const EASY_MODE = 4;
-const MEDIUM_MODE = 6;
-const HARD_MODE = 12;
-
-export default function Gameboard({ player1, player2, timer, setTimer, setGameOver, currentPlayer }) {
-    const [cardQuantity, setCardQuantity] = useState(MEDIUM_MODE);
+export default function Gameboard({ player1, player2, timer, setTimer, setGameOver, currentPlayer, mode, setMode }) {
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
 
     const [noClickEvents, setNoClickEvents] = useState(true);
     const [loadedImageCount, setLoadedImageCount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [gameList, setGameList] = useGameList(cardQuantity);
+    const [gameList, setGameList] = useGameList(mode);
     const [isGameStarted, setIsGameStarted] = useState(false);
 
     function gameboardClassName(){
@@ -32,14 +28,11 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
         setNoClickEvents(false)
         setTimer([...timer, new Date()])
     }
-
+    
     useEffect(() => {
-        if (loadedImageCount === 2 * cardQuantity) {
-            setIsLoaded(true)
-        } else {
-            setIsLoaded(false)
-        }
-    }, [loadedImageCount])  
+        const loadCondition = loadedImageCount === 2 * mode;
+        setIsLoaded(loadCondition)
+    }, [loadedImageCount])
 
     useEffect(() => {
         if (activeCards.length == 1) {
@@ -98,6 +91,7 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
 
     useEffect(() => {
         if ((seenPokemon.length === gameList.length/2) && seenPokemon.length > 0) {
+            console.log('Game end triggered')
             setTimer(timer => [...timer, new Date()])
             setGameOver(true)
         }
@@ -113,14 +107,16 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
         timer, setTimer,
         setIsGameStarted, setNoClickEvents}
 
+    useEffect(() => {
     if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
-        setGameOver(true)
-    }
+            setGameOver(true)
+        }
+    }, [seenPokemon])
     
     function handleModeButton(mode){
         return () => {
             setLoadedImageCount(0)
-            setCardQuantity(mode)
+            setMode(mode)
         }
     }
     return (

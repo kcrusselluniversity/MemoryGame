@@ -4,6 +4,10 @@ import GameOver from './GameOver'
 import './App.css'
 import { useState } from 'react'
 
+export const EASY_MODE = 4;
+export const MEDIUM_MODE = 6;
+export const HARD_MODE = 12;
+
 function App() {
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
@@ -12,21 +16,26 @@ function App() {
   const [restartGame, setRestartGame] = useState(false)
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [timer, setTimer] = useState([]);
+  const [mode, setMode] = useState(EASY_MODE)
   
   let page = null;
   if (playersEntered === false) {
+    console.log('branch 1')
     page = <PlayersForm 
     setPlayer1={setPlayer1}
     setPlayer2={setPlayer2}
     setPlayersEntered={setPlayersEntered}
     setCurrentPlayer={setCurrentPlayer}/>
   } else if (gameOver === false || restartGame === true) {
+    console.log('branch 2')
     page = <Gameboard 
-      player1={player1} player2={player2} 
-      timer={timer} setTimer={setTimer} 
-      setGameOver={setGameOver} 
-      currentPlayer={currentPlayer}/>
+    player1={player1} player2={player2} 
+    timer={timer} setTimer={setTimer} 
+    setGameOver={setGameOver} 
+    currentPlayer={currentPlayer}
+    mode={mode} setMode={setMode}/>
   } else if (gameOver === true) {
+    console.log('branch 3')
     page = <GameOver 
       timer={timer} setRestartGame={setRestartGame}
       player1={player1} player2={player2}
