@@ -20,7 +20,6 @@ function App() {
   
   let page = null;
   if (playersEntered === false) {
-    console.log('branch 1')
     
     page = <PlayersForm 
       setPlayer1={setPlayer1}
@@ -28,7 +27,6 @@ function App() {
       setPlayersEntered={setPlayersEntered}
       setCurrentPlayer={setCurrentPlayer}/>
   } else if (gameOver === true) {
-    console.log('branch 2')
 
     page = <GameOver 
       timer={timer} setRestartGame={setRestartGame}
@@ -37,7 +35,6 @@ function App() {
       setGameOver={setGameOver}/>
     
   } else if (gameOver === false || restartGame === true) {
-    console.log('branch 3')
 
     page = <Gameboard 
       player1={player1} player2={player2} 
