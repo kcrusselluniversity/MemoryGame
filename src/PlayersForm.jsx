@@ -2,9 +2,6 @@ import { useState } from "react";
 
 export default function PlayersForm({ setPlayer1, setPlayer2, setPlayersEntered, setCurrentPlayer }) {
 
-    const [form1Input, setform1Input] = useState('')
-    const [form2Input, setform2Input] = useState('')
-
     function handleSubmit(e) {
         e.preventDefault()
         
@@ -18,8 +15,8 @@ export default function PlayersForm({ setPlayer1, setPlayer2, setPlayersEntered,
 
     return (
         <form onSubmit={handleSubmit}>
-            <input  onChange={e => e.target.value} type="text" name="player1" placeholder="player 1" />
-            <input  onChange={e => e.target.value} type="text" name="player2" placeholder="player 2" />
+            <input type="text" name="player1" placeholder="player 1" />
+            <input type="text" name="player2" placeholder="player 2" />
             <button type="submit">Play</button>
         </form>
     )

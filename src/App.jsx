@@ -21,27 +21,31 @@ function App() {
   let page = null;
   if (playersEntered === false) {
     console.log('branch 1')
+    
     page = <PlayersForm 
-    setPlayer1={setPlayer1}
-    setPlayer2={setPlayer2}
-    setPlayersEntered={setPlayersEntered}
-    setCurrentPlayer={setCurrentPlayer}/>
-  } else if (gameOver === false || restartGame === true) {
-    console.log('branch 2')
-    page = <Gameboard 
-    player1={player1} player2={player2} 
-    timer={timer} setTimer={setTimer} 
-    setGameOver={setGameOver} 
-    currentPlayer={currentPlayer}
-    mode={mode} setMode={setMode}/>
+      setPlayer1={setPlayer1}
+      setPlayer2={setPlayer2}
+      setPlayersEntered={setPlayersEntered}
+      setCurrentPlayer={setCurrentPlayer}/>
   } else if (gameOver === true) {
-    console.log('branch 3')
+    console.log('branch 2')
+
     page = <GameOver 
       timer={timer} setRestartGame={setRestartGame}
       player1={player1} player2={player2}
-      currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}/>
-  }
+      currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}
+      setGameOver={setGameOver}/>
+    
+  } else if (gameOver === false || restartGame === true) {
+    console.log('branch 3')
 
+    page = <Gameboard 
+      player1={player1} player2={player2} 
+      timer={timer} setTimer={setTimer} 
+      setGameOver={setGameOver} 
+      currentPlayer={currentPlayer}
+      mode={mode} setMode={setMode}/>
+  }
   return (
     <>
       <h1>Memory Game</h1>
