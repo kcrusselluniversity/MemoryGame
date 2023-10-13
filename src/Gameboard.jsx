@@ -2,14 +2,14 @@
 // TODO: BREAK THIS COMPONENT DOWN INTO SMALLER COMPONENTS
 // TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + DATA-STRUCTURES 
 //       INSTEAD
-// TODO: MOVE GAME MODE INTO PLAYERS FORM COMPONENT
 
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameList from "./useGameList";
-import { EASY_MODE, MEDIUM_MODE, HARD_MODE } from "./App";
+import { HARD_MODE } from "./App";
+import LoadingSpinner from "./LoadingSpinner";
 
-export default function Gameboard({ player1, player2, timer, setTimer, setGameOver, currentPlayer, mode, setMode, highScore }) {
+export default function Gameboard({ player1, player2, timer, setTimer, setGameOver, currentPlayer, mode, highScore }) {
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
 
@@ -110,29 +110,19 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
         }
     }, [seenPokemon])
     
-    function handleModeButton(mode){
-        return () => {
-            setLoadedImageCount(0)
-            setMode(mode)
-        }
-    }
     return (
         <>
             <div className="playerContainer">
                 <h2 className={player1 === currentPlayer ? 'currentPlayer' : ''}>Player 1: {player1}</h2>
                 <h2 className={player2 === currentPlayer ? 'currentPlayer' : ''}>Player 2: {player2}</h2>
             </div>
+
             {highScore.time && <h2> High Score: {highScore.time} seconds ({highScore.player})</h2>}
+
             <button className={`${isLoaded ? 'startButton' : 'visibilityNone'} ${isLoaded && isGameStarted ? 'displayNone' : ''}`} 
             onClick={handleStart}>Start</button>
 
-            <div className={isLoaded ? "displayNone" : "spinnerContainer"}><div className="loadingSpinner"></div></div>
-            
-            <div className={`${isLoaded && !isGameStarted ? 'modeButtonsContainer' : 'visibilityNone'} ${isLoaded && isGameStarted ? 'displayNone' : ''}`}>
-                <button onClick={handleModeButton(EASY_MODE)}>Easy</button>
-                <button onClick={handleModeButton(MEDIUM_MODE)}>Medium</button>
-                <button onClick={handleModeButton(HARD_MODE)}>Hard</button>
-            </div>
+            <LoadingSpinner isLoaded={isLoaded} />
 
             <div className={`gameboard ${!isLoaded && 'displayNone'} ${noClickEvents && 'noClick'} ${mode === HARD_MODE && 'hardModeMaxWidth'}`}>
                 {gameList.map(pokemon => 

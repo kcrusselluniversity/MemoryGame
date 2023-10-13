@@ -21,7 +21,7 @@
 
 #root {
   display: grid;
-  grid-template-rows: 120px 65px 65px 65px auto;
+  grid-template-rows: 120px 65px 65px 30px auto;
   height: 100vh;
   place-items: center;
 }
@@ -126,8 +126,10 @@ button:focus-visible {
 .spinnerContainer {
   display: grid;
   place-items: center;
-  height: 100%;
+  height: 400px;
   width: 100%;
+  grid-row-start: 5;
+  align-self: start;
 }
 
 @keyframes spin {

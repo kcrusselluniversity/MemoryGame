@@ -1,5 +1,6 @@
-import { useState } from "react";
+// TODO: FIX MODE BUTTONS NOT BEING TABBED OVER IN FORM
 import ModeButtons from "./modeButtons";
+import { EASY_MODE } from "./App";
 
 export default function PlayersForm({ setPlayer1, setPlayer2, setPlayersEntered, setCurrentPlayer, setMode }) {
 
@@ -8,13 +9,13 @@ export default function PlayersForm({ setPlayer1, setPlayer2, setPlayersEntered,
         
         const formData = new FormData(e.target)
         const [player1, player2] = [formData.get('player1'), formData.get('player2')]
-        const mode = formData.get('mode')
+        const mode = formData.get('mode') || EASY_MODE
 
+        setMode(mode)
         setPlayer1(player1)
         setPlayer2(player2)
-        setPlayersEntered(true)
         setCurrentPlayer(player1)
-        setMode(mode)
+        setPlayersEntered(true)
     }
 
     return (

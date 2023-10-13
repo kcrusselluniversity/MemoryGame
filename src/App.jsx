@@ -45,7 +45,7 @@ function App() {
       timer={timer} setTimer={setTimer} 
       setGameOver={setGameOver} 
       currentPlayer={currentPlayer}
-      mode={mode} setMode={setMode}
+      mode={mode} 
       highScore={highScore}/>
   }
   return (
