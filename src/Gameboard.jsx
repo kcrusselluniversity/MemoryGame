@@ -2,6 +2,7 @@
 // TODO: BREAK THIS COMPONENT DOWN INTO SMALLER COMPONENTS
 // TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + DATA-STRUCTURES 
 //       INSTEAD
+// TODO: MOVE GAME MODE INTO PLAYERS FORM COMPONENT
 
 import { useEffect, useState } from "react";
 import Card from "./Card";
@@ -17,12 +18,6 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
     const [isLoaded, setIsLoaded] = useState(false);
     const [gameList, setGameList] = useGameList(mode);
     const [isGameStarted, setIsGameStarted] = useState(false);
-
-    function gameboardClassName(){
-        if (!isLoaded) return 'gameboard displayNone'
-        if (noClickEvents) return 'gameboard noClick'
-        return 'gameboard'  
-    }
 
     function handleStart() {
         setIsGameStarted(true)

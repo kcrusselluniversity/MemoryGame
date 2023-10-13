@@ -9,6 +9,7 @@ export const MEDIUM_MODE = 6;
 export const HARD_MODE = 12;
 
 function App() {
+
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
   const [playersEntered, setPlayersEntered] = useState(false);

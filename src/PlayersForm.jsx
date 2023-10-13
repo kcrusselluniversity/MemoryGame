@@ -15,8 +15,8 @@ export default function PlayersForm({ setPlayer1, setPlayer2, setPlayersEntered,
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" name="player1" placeholder="player 1" />
-            <input type="text" name="player2" placeholder="player 2" />
+            <input required type="text" name="player1" placeholder="player 1" />
+            <input required type="text" name="player2" placeholder="player 2" />
             <button type="submit">Play</button>
         </form>
     )
