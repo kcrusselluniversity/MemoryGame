@@ -27,7 +27,8 @@ function App() {
       setPlayer1={setPlayer1}
       setPlayer2={setPlayer2}
       setPlayersEntered={setPlayersEntered}
-      setCurrentPlayer={setCurrentPlayer}/>
+      setCurrentPlayer={setCurrentPlayer}
+      setMode={setMode}/>
   } else if (gameOver === true) {
 
     page = <GameOver 

@@ -128,7 +128,7 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
 
             <div className={isLoaded ? "displayNone" : "spinnerContainer"}><div className="loadingSpinner"></div></div>
             
-            <div className={`${isLoaded && !isGameStarted ? 'gameMode' : 'visibilityNone'} ${isLoaded && isGameStarted ? 'displayNone' : ''}`}>
+            <div className={`${isLoaded && !isGameStarted ? 'modeButtonsContainer' : 'visibilityNone'} ${isLoaded && isGameStarted ? 'displayNone' : ''}`}>
                 <button onClick={handleModeButton(EASY_MODE)}>Easy</button>
                 <button onClick={handleModeButton(MEDIUM_MODE)}>Medium</button>
                 <button onClick={handleModeButton(HARD_MODE)}>Hard</button>
