@@ -1,17 +1,23 @@
 import stopWatch from "./utils/stopwatch";
 
-// TODO: NEED TO BE ABLE TO RESET SEEN POKEMON, OR FIGURE OUT A BETTER WAY TO HANDLE THE GAME LOGIC TO END THE GAME
-
-export default function GameOver({ timer, setRestartGame, player1, player2, currentPlayer, setCurrentPlayer, setGameOver }) {
+export default function GameOver({ timer, setTimer, setRestartGame, player1, player2, currentPlayer, setCurrentPlayer, setGameOver, highScore, setHighScore }) {
+    const time = stopWatch(timer[1], timer[0]);
+    
     function handleRestart() {
+        if (highScore.time === null || time < highScore.time) {
+            console.log('time ',time)
+            console.log('highScore.time ',highScore.time)
+            setHighScore({time: time, player: currentPlayer})
+        }
         setRestartGame(true)
+        setTimer([])
         setGameOver(false)
         currentPlayer === player1 ? setCurrentPlayer(player2) : setCurrentPlayer(player1)
     }   
 
     return (
         <>
-            <h1 style={{gridRowStart: 4}}>{stopWatch(timer[1], timer[0])}</h1>
+            <h1 style={{gridRowStart: 4}}>{currentPlayer}: {time} seconds</h1>
             <button className='restartButton' onClick={handleRestart}>Restart</button>
         </>
     )

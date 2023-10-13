@@ -17,6 +17,7 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [timer, setTimer] = useState([]);
   const [mode, setMode] = useState(EASY_MODE)
+  const [highScore, setHighScore] = useState({time: null, player: null})
   
   let page = null;
   if (playersEntered === false) {
@@ -32,7 +33,8 @@ function App() {
       timer={timer} setRestartGame={setRestartGame}
       player1={player1} player2={player2}
       currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}
-      setGameOver={setGameOver}/>
+      setGameOver={setGameOver} setTimer={setTimer} 
+      highScore={highScore} setHighScore={setHighScore}/>
     
   } else if (gameOver === false || restartGame === true) {
 
@@ -41,7 +43,8 @@ function App() {
       timer={timer} setTimer={setTimer} 
       setGameOver={setGameOver} 
       currentPlayer={currentPlayer}
-      mode={mode} setMode={setMode}/>
+      mode={mode} setMode={setMode}
+      highScore={highScore}/>
   }
   return (
     <>

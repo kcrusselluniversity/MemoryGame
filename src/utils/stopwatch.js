@@ -5,5 +5,5 @@ export default function stopWatch(finishTime, startTime) {
     
     const secondsElapsed = durationInMilliseconds/millisecondsInSeconds;
 
-    return `Time: ${secondsElapsed} seconds`
+    return secondsElapsed
 }

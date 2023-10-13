@@ -21,7 +21,7 @@
 
 #root {
   display: grid;
-  grid-template-rows: 100px 65px 65px 65px auto;
+  grid-template-rows: 120px 65px 65px 65px auto;
   height: 100vh;
   place-items: center;
 }
@@ -106,6 +106,7 @@ button:focus-visible {
   width: 80vw;
   justify-content: center;
   grid-row-start: 5;
+  align-self: start;
 }
 
 .hidden {
@@ -189,4 +190,11 @@ input {
 .restartButton {
   grid-row-start: 5;
   font-size: 3rem;
+}
+
+.playerContainer {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  margin-bottom: 1rem;
 }

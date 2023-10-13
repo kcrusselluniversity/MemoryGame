@@ -7,7 +7,7 @@ import Card from "./Card";
 import useGameList from "./useGameList";
 import { EASY_MODE, MEDIUM_MODE, HARD_MODE } from "./App";
 
-export default function Gameboard({ player1, player2, timer, setTimer, setGameOver, currentPlayer, mode, setMode }) {
+export default function Gameboard({ player1, player2, timer, setTimer, setGameOver, currentPlayer, mode, setMode, highScore }) {
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
 
@@ -121,8 +121,11 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
     }
     return (
         <>
-            <h2 className={player1 === currentPlayer ? 'currentPlayer' : ''}>Player 1: {player1}</h2>
-            <h2 className={player2 === currentPlayer ? 'currentPlayer' : ''}>Player 2: {player2}</h2>
+            <div className="playerContainer">
+                <h2 className={player1 === currentPlayer ? 'currentPlayer' : ''}>Player 1: {player1}</h2>
+                <h2 className={player2 === currentPlayer ? 'currentPlayer' : ''}>Player 2: {player2}</h2>
+            </div>
+            {highScore.time && <h2> High Score: {highScore.time} seconds ({highScore.player})</h2>}
             <button className={`${isLoaded ? 'startButton' : 'visibilityNone'} ${isLoaded && isGameStarted ? 'displayNone' : ''}`} 
             onClick={handleStart}>Start</button>
 
