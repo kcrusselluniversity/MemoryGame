@@ -1,7 +1,8 @@
 // TODO: FIX REPEATED CODE USING HELPER FUNCTION updateGameList
-// TODO: FIX BUG OF SEEN POKEMON CARDS STILL CLICKABLE
-// TODO: FIX USING CSS TO CONTROL EVERYTHING :(
-// TODO: FIX CHANGING MODES DOESNT SHOW RELOAD SPINNER
+// TODO: BREAK THIS COMPONENT DOWN INTO SMALLER COMPONENTS
+// TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + DATA-STRUCTURES 
+//       INSTEAD
+
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import useGameList from "./useGameList";
@@ -105,7 +106,8 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
         loadedImageCount,
         setLoadedImageCount,
         timer, setTimer,
-        setIsGameStarted, setNoClickEvents}
+        setIsGameStarted, 
+        setNoClickEvents}
 
     useEffect(() => {
     if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
