@@ -106,6 +106,7 @@ button:focus-visible {
   justify-content: center;
   grid-row-start: 5;
   align-self: start;
+  max-width: 1000px;
 }
 
 .hidden {
@@ -197,4 +198,8 @@ input {
   align-items: center;
   gap: 4rem;
   margin-bottom: 1rem;
+}
+
+.hardModeMaxWidth {
+  max-width: 1400px;
 }

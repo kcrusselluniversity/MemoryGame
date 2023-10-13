@@ -139,7 +139,7 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
                 <button onClick={handleModeButton(HARD_MODE)}>Hard</button>
             </div>
 
-            <div className={gameboardClassName()}>
+            <div className={`gameboard ${!isLoaded && 'displayNone'} ${noClickEvents && 'noClick'} ${mode === HARD_MODE && 'hardModeMaxWidth'}`}>
                 {gameList.map(pokemon => 
                     <Card 
                         key={pokemon.id} 
