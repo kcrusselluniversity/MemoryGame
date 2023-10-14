@@ -4,10 +4,13 @@
 //       INSTEAD
 
 import { useEffect, useState } from "react";
-import Card from "./Card";
-import useGameList from "./useGameList";
 import { HARD_MODE } from "./App";
+import useGameList from "./useGameList";
+import Card from "./Card";
 import LoadingSpinner from "./LoadingSpinner";
+import PlayersDisplay from "./PlayersDisplay";
+import HighScoreDisplay from "./HighScoreDisplay";
+import StartButton from "./StartButton";
 
 export default function Gameboard({ player1, player2, timer, setTimer, setGameOver, currentPlayer, mode, highScore }) {
     const [activeCards, setActiveCards] = useState([]);
@@ -112,15 +115,11 @@ export default function Gameboard({ player1, player2, timer, setTimer, setGameOv
     
     return (
         <>
-            <div className="playerContainer">
-                <h2 className={player1 === currentPlayer ? 'currentPlayer' : ''}>Player 1: {player1}</h2>
-                <h2 className={player2 === currentPlayer ? 'currentPlayer' : ''}>Player 2: {player2}</h2>
-            </div>
+            <PlayersDisplay player1={player1} player2={player2} currentPlayer={currentPlayer}/>
 
-            {highScore.time && <h2> High Score: {highScore.time} seconds ({highScore.player})</h2>}
+            <HighScoreDisplay highScore={highScore} />
 
-            <button className={`${isLoaded ? 'startButton' : 'visibilityNone'} ${isLoaded && isGameStarted ? 'displayNone' : ''}`} 
-            onClick={handleStart}>Start</button>
+            <StartButton isLoaded={isLoaded} isGameStarted={isGameStarted} handleStart={handleStart}/>
 
             <LoadingSpinner isLoaded={isLoaded} />
 
