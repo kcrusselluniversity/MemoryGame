@@ -9,7 +9,16 @@ export const MEDIUM_MODE = 6;
 export const HARD_MODE = 9;
 
 function App() {
-
+  const [gameState, setGameState] = useState({
+    mode: EASY_MODE,
+    player1: null,
+    player2: null,
+    currentPlayer: null,
+    playersEntered: false,
+    gameOver: false,
+    restartGame: false,
+  })
+  
   const [player1, setPlayer1] = useState(null);
   const [player2, setPlayer2] = useState(null);
   const [playersEntered, setPlayersEntered] = useState(false);
