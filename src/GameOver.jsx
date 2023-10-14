@@ -5,8 +5,6 @@ export default function GameOver({ timer, setTimer, setRestartGame, player1, pla
     
     function handleRestart() {
         if (highScore.time === null || time < highScore.time) {
-            console.log('time ',time)
-            console.log('highScore.time ',highScore.time)
             setHighScore({time: time, player: currentPlayer})
         }
         setRestartGame(true)
@@ -17,7 +15,7 @@ export default function GameOver({ timer, setTimer, setRestartGame, player1, pla
 
     return (
         <>
-            <h1 style={{gridRowStart: 4}}>{currentPlayer}: {time} seconds</h1>
+            <h1 className="playerGametime">{currentPlayer}: {time} seconds</h1>
             <button className='restartButton' onClick={handleRestart}>Restart</button>
         </>
     )

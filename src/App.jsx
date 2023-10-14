@@ -1,4 +1,4 @@
-import Gameboard from './Gameboard'
+import GameboardPage from './GameboardPage'
 import PlayersForm from './PlayersForm'
 import GameOver from './GameOver'
 import './App.css'
@@ -40,7 +40,7 @@ function App() {
     
   } else if (gameOver === false || restartGame === true) {
 
-    page = <Gameboard 
+    page = <GameboardPage 
       player1={player1} player2={player2} 
       timer={timer} setTimer={setTimer} 
       setGameOver={setGameOver} 

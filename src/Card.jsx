@@ -1,5 +1,8 @@
 // TODO: USE FLIP-HORIZONTALLY PROP of TILT to have a nice animation
 // when the card flips over
+// TODO: Add the back of the card as an image in the assets and use that
+// for the facedown visible side
+
 import Tilt from 'react-parallax-tilt';
 
 export default function Card({ 
