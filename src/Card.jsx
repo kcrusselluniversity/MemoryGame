@@ -28,7 +28,7 @@ export default function Card({
     }
 
     return (
-        <Tilt tiltEnable={!disabled} transitionSpeed={600} perspective={1000} scale={1.02}>
+        <Tilt tiltEnable={!disabled} transitionSpeed={600} perspective={1000} scale={1.02} tiltMaxAngleX={0} tiltMaxAngleY={20}>
             <div className="card" onClick={handleClick}>
                 <div className={visible ? null : 'hidden'}>
                     <h3 style={{margin: '0px', paddingBottom: '6px', color: 'black'}}>{name}</h3>

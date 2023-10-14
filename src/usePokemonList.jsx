@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import randomNumberArray from "./utils/randomNumberArray";
 import fetchPokemon from "./utils/fetchPokemon";
 
-const NUMBER_OF_POKEMON = 500;
+const NUMBER_OF_POKEMON = 700;
 
 function addPokemonCardProperties(pokemon) {
     return {
