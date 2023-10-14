@@ -5,5 +5,5 @@ export default function stopWatch(finishTime, startTime) {
     
     const secondsElapsed = durationInMilliseconds/millisecondsInSeconds;
 
-    return secondsElapsed
+    return Math.round(secondsElapsed * 100)/100
 }
