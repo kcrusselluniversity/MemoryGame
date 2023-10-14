@@ -19,14 +19,15 @@ LAYOUT, ETC */
   --grid-width: 220px;
   --grid-height: 220px;
 
-  --card-width: 165px;
+  --card-width: 140px;
   --card-aspect-ratio: 1.4;
+  --pokemon-img-width: 130px;
   --border-color-hover: #646cff;
 }
 
 #root {
   display: grid;
-  grid-template-rows: 150px 65px 65px 30px auto;
+  grid-template-rows: 100px 65px 65px auto;
   height: 100vh;
   place-items: center;
 }
@@ -44,6 +45,16 @@ a:hover {
   color: #535bf2;
 }
 
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin: 0px;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -51,12 +62,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  margin: 0px;
 }
 
 button {
@@ -80,46 +85,35 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
+/* CARD COMPONENT STYLING */
 .card {
   width: var(--card-width);
   height: calc(var(--card-width) * var(--card-aspect-ratio));
   background-color: white;
   border: 4px solid #4caeff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   border-radius: 8px;
 }
 
-.gameboard {
+.card-faceup {
+  height: 100%;
   display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  gap: 1rem;
-  width: 80vw;
-  justify-content: center;
-  grid-row-start: 5;
-  align-self: start;
-  max-width: 800px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+.card img {
+  height: var(--pokemon-img-width);
+  width: var(--pokemon-img-width);
 }
 
-.hidden {
-  display: none;
+.card h3 {
+  font-size: 1rem;
+  margin: 6px 0px;
+  color: black;
 }
 
+/* LOADING SPINNER STYLING */
 .loadingSpinner {
   border: 6px solid white;
   border-top: 6px solid rgb(177, 177, 255);
@@ -127,7 +121,7 @@ button:focus-visible {
   height: var(--spinner-size);
   width: var(--spinner-size);
   box-shadow: 0 0 6px white; 
-  animation: spin 1s linear infinite;
+  animation: spin 0.6s linear infinite;
 }
 
 .spinnerContainer {
@@ -148,18 +142,7 @@ button:focus-visible {
   }
 }
 
-.noClick {
-  pointer-events: none;
-}
-
-.displayNone {
-  display: none;
-}
-
-.visibilityNone {
-  visibility: hidden;
-}
-
+/* PLAYERS FORM PAGE STYLING */
 form {
   display: flex;
   flex-direction: column;
@@ -174,7 +157,7 @@ input {
   padding: 8px;
 
 }
-/* Mode Difficulty form input styling */
+
 .modeButtonsContainer {
   display: flex;
   justify-content: center;
@@ -205,6 +188,20 @@ input[type="radio"]:checked + .radio-indicator {
   font-weight: 500;
 }
 
+/* GAMEBOARD PAGE STYING */
+.gameboard {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 1rem;
+  width: 80vw;
+  justify-content: center;
+  grid-row-start: 5;
+  align-self: start;
+  max-width: 800px;
+  margin-bottom: 1rem;
+}
+
 .startButton {
   position: absolute;
   top: 50%;
@@ -229,11 +226,15 @@ input[type="radio"]:checked + .radio-indicator {
   margin-top: 4rem;
 }
 
+/* PLAYER CONTAINER COMPONENT STYLING */
 .playerContainer {
   display: flex;
   align-items: center;
   gap: 4rem;
-  margin-bottom: 1rem;
+}
+
+.medModeMaxWidth {
+  max-width: 1000px;
 }
 
 .hardModeMaxWidth {
@@ -242,4 +243,22 @@ input[type="radio"]:checked + .radio-indicator {
 
 .playerGametime {
   grid-row-start: 3;
+  font-size: 2rem;
+}
+
+/* UTIL CLASSES */
+.hidden {
+  display: none;
+}
+
+.noClick {
+  pointer-events: none;
+}
+
+.displayNone {
+  display: none;
+}
+
+.visibilityNone {
+  visibility: hidden;
 }

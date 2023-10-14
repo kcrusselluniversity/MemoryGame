@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 export const EASY_MODE = 4;
 export const MEDIUM_MODE = 6;
-export const HARD_MODE = 12;
+export const HARD_MODE = 9;
 
 function App() {
 

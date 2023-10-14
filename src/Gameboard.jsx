@@ -3,12 +3,13 @@
 
 import classNames from "classnames";
 import Card from "./Card";
-import { HARD_MODE } from "./App";
+import { HARD_MODE, MEDIUM_MODE } from "./App";
 
 export default function Gameboard({ gameList, isLoaded, noClickEvents, stateProps, mode}) {
     const classList = classNames('gameboard', {
         'displayNone': !isLoaded,
         'noClick': noClickEvents,
+        'medModeMaxWidth': mode == MEDIUM_MODE,
         'hardModeMaxWidth': mode == HARD_MODE 
     });
 
