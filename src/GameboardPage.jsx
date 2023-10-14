@@ -1,7 +1,5 @@
 // TODO: FIX REPEATED CODE USING HELPER FUNCTION updateGameList
-// TODO: BREAK THIS COMPONENT DOWN INTO SMALLER COMPONENTS
-// TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + DATA-STRUCTURES 
-//       INSTEAD
+// TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + DATA-STRUCTURES INSTEAD
 // TODO: REFACTOR CSS LAYOUT EG (GRID) TO BE SPECIFIC TO EACH PAGE INSTEAD OF SETTING IT ON THE ROOT ELEMENT
 
 import { useEffect, useState } from "react";
@@ -12,18 +10,27 @@ import HighScoreDisplay from "./HighScoreDisplay";
 import StartButton from "./StartButton";
 import Gameboard from "./Gameboard";
 
-export default function GameboardPage({ player1, player2, timer, setTimer, setGameOver, currentPlayer, mode, highScore }) {
+function GameboardPage({ 
+    gameState, 
+    setGameState, 
+    timer, 
+    setTimer, 
+    highScore }) 
+{
+    const {mode} = gameState;
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
-
+    
     const [noClickEvents, setNoClickEvents] = useState(true);
     const [loadedImageCount, setLoadedImageCount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
     const [gameList, setGameList] = useGameList(mode);
-    const [isGameStarted, setIsGameStarted] = useState(false);
-
+    
     function handleStart() {
-        setIsGameStarted(true)
+        setGameState({
+            ...gameState,
+            isGameStarted: true
+        })
         setNoClickEvents(false)
         setTimer([...timer, new Date()])
     }
@@ -91,7 +98,7 @@ export default function GameboardPage({ player1, player2, timer, setTimer, setGa
     useEffect(() => {
         if ((seenPokemon.length === gameList.length/2) && seenPokemon.length > 0) {
             setTimer(timer => [...timer, new Date()])
-            setGameOver(true)
+            setGameState({...gameState, gameOver: true})
         }
     }, [seenPokemon])
 
@@ -103,27 +110,28 @@ export default function GameboardPage({ player1, player2, timer, setTimer, setGa
         loadedImageCount,
         setLoadedImageCount,
         timer, setTimer,
-        setIsGameStarted, 
         setNoClickEvents}
 
     useEffect(() => {
     if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
-            setGameOver(true)
+            setGameState({...gameState, gameOver: true})
         }
     }, [seenPokemon])
     
     return (
         <>
-            <PlayersDisplay player1={player1} player2={player2} currentPlayer={currentPlayer}/>
+            <PlayersDisplay gameState={gameState} setGameState={setGameState}/>
             <HighScoreDisplay highScore={highScore} />
-            <StartButton isLoaded={isLoaded} isGameStarted={isGameStarted} handleStart={handleStart}/>
+            <StartButton isLoaded={isLoaded} handleStart={handleStart} gameState={gameState}/>
             <LoadingSpinner isLoaded={isLoaded} />
             <Gameboard 
+                gameState={gameState}
                 gameList={gameList} 
                 isLoaded={isLoaded}
                 noClickEvents={noClickEvents}
                 stateProps={stateProps}
-                mode={mode}
             />
         </>)         
 }
+
+export default GameboardPage

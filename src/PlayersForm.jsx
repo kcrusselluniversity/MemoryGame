@@ -2,20 +2,32 @@
 import ModeButtons from "./modeButtons";
 import { EASY_MODE } from "./App";
 
-export default function PlayersForm({ setPlayer1, setPlayer2, setPlayersEntered, setCurrentPlayer, setMode }) {
+export default function PlayersForm({ gameState, setGameState }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        
-        const formData = new FormData(e.target)
-        const [player1, player2] = [formData.get('player1'), formData.get('player2')]
-        const mode = formData.get('mode') || EASY_MODE
 
-        setMode(mode)
-        setPlayer1(player1)
-        setPlayer2(player2)
-        setCurrentPlayer(player1)
-        setPlayersEntered(true)
+        const formData = new FormData(e.target)
+        const [playerName1, playerName2] = [formData.get('player1'), formData.get('player2')]
+        const selectedMode = formData.get('mode') || EASY_MODE
+
+        const obj = {
+            ...gameState,
+            mode: selectedMode,
+            player1: playerName1,
+            player2: playerName2,
+            currentPlayer: playerName1,
+            playersEntered: true
+        }
+
+        setGameState({
+            ...gameState,
+            mode: selectedMode,
+            player1: playerName1,
+            player2: playerName2,
+            currentPlayer: playerName1,
+            playersEntered: true
+        })
     }
 
     return (

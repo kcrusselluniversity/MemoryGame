@@ -1,5 +1,5 @@
-export default function PlayersDisplay({ player1, player2, currentPlayer }) {
-    
+export default function PlayersDisplay({ gameState: {player1, player2, currentPlayer} }) {
+        
     return <div className="playerContainer">
                 <h2 className={player1 === currentPlayer ? 'currentPlayer' : ''}>
                     Player 1: {player1}

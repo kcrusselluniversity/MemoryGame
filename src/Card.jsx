@@ -11,7 +11,7 @@ export default function Card({
     gameList, setGameList,
     setLoadedImageCount, 
     timer, setTimer,
-    setIsGameStarted, setNoClickEvents }) {
+    setNoClickEvents }) {
 
     function handleClick() {         
         if (disabled) return;

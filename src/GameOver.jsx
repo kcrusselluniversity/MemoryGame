@@ -1,16 +1,23 @@
 import stopWatch from "./utils/stopwatch";
 
-export default function GameOver({ timer, setTimer, setRestartGame, player1, player2, currentPlayer, setCurrentPlayer, setGameOver, highScore, setHighScore }) {
+function GameOver({ gameState, setGameState, timer, setTimer, highScore, setHighScore }) {
+    const { player1, player2, currentPlayer } = gameState;
+    
     const time = stopWatch(timer[1], timer[0]);
     
     function handleRestart() {
         if (highScore.time === null || time < highScore.time) {
             setHighScore({time: time, player: currentPlayer})
         }
-        setRestartGame(true)
+
         setTimer([])
-        setGameOver(false)
-        currentPlayer === player1 ? setCurrentPlayer(player2) : setCurrentPlayer(player1)
+        setGameState({
+            ...gameState,
+            restartGame: true,
+            gameOver: false,
+            isGameStarted: false,
+            currentPlayer: currentPlayer === player1 ? player2 : player1
+        })
     }   
 
     return (
@@ -20,3 +27,5 @@ export default function GameOver({ timer, setTimer, setRestartGame, player1, pla
         </>
     )
 }
+
+export default GameOver

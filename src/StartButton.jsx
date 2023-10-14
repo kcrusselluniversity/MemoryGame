@@ -1,8 +1,6 @@
 import classNames from "classnames";
 
-export default function StartButton(props) {
-    const {isLoaded, isGameStarted, handleStart} = props;
-
+function StartButton({isLoaded, handleStart, gameState: {isGameStarted}}) {
     const classList = classNames({
         'startButton': isLoaded,
         'visibilityNone': !isLoaded,
@@ -11,3 +9,5 @@ export default function StartButton(props) {
 
     return <button className={classList} onClick={handleStart}>Start</button>
 }
+
+export default StartButton
