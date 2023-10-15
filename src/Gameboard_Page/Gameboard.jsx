@@ -10,11 +10,11 @@ import { MEDIUM_MODE, HARD_MODE } from "../atoms/atoms";
 
 export default function Gameboard({ 
     pokemonCardsState,
-    activeCardsState,
+    activeCardIdsState,
     timerState}) 
 {
     const { pokemonCards, setPokemonCards } = pokemonCardsState;
-    const { activeCards, setActiveCards } = activeCardsState;
+    const { activeCardIds, setActiveCardIds } = activeCardIdsState;
     const { timer, setTimer } = timerState;
 
     const [gameState, setGameState] = useAtom(gameStateAtom) 
@@ -44,7 +44,7 @@ export default function Gameboard({
                 key={pokemon.id}
                 pokemon={pokemon}
                 pokemonCardsState={{pokemonCards, setPokemonCards}}
-                activeCardsState={{activeCards, setActiveCards}}
+                activeCardIdsState={{activeCardIds, setActiveCardIds}}
                 loadedImageCountRef={loadedImageCountRef}
             />)}
         </div>

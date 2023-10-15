@@ -9,13 +9,13 @@ import { gameStateAtom } from '../atoms/atoms';
 export default function Card({ 
     pokemon, 
     pokemonCardsState,
-    activeCardsState, 
+    activeCardIdsState, 
     loadedImageCountRef }) 
 {   
     const [gameState, setGameState] = useAtom(gameStateAtom);
     const { name, imgUrl, disabled, visible, id } = pokemon;
     const { pokemonCards, setPokemonCards } = pokemonCardsState;
-    const { activeCards, setActiveCards } = activeCardsState;
+    const { activeCardIds, setActiveCardIds } = activeCardIdsState;
     const { mode } = gameState;
     const totalImagesToLoad = mode * 2;
  
@@ -33,7 +33,7 @@ export default function Card({
         })
         
         setPokemonCards(updatedpokemonCards)
-        setActiveCards([...activeCards, currentPokemon])
+        setActiveCardIds([...activeCardIds, currentPokemon])
     }
 
     const handleOnLoad = () => {
