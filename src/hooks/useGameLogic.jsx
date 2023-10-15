@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
 
-export default function useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setseenPokemonIdsIds, seenPokemonIds, setTimer) {
+export default function useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setSeenPokemonIds, seenPokemonIds, setTimer) {
     const [gameState, setGameState] = useAtom(gameStateAtom);
 
     // This function reenables call cards except for the active and seen cards
@@ -29,7 +29,7 @@ export default function useGameLogic(activeCardIds, setActiveCardIds, pokemonCar
                 const [firstCard, secondCard] = activeCardIds;
                 if (firstCard.name === secondCard.name) {
                     // Add this pokemon to seen
-                    setseenPokemonIdsIds([...seenPokemonIds, firstCard.name]);
+                    setSeenPokemonIds([...seenPokemonIds, firstCard.name]);
 
                     // Reenable all cards except for the two active cards (as they match)
                     const updatedPokemonCards = pokemonCards.map(pokemon => {
