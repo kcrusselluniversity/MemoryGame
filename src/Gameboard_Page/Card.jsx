@@ -9,10 +9,11 @@ export default function Card({
     name, imgUrl, disabled, visible, id, 
     activeCards, setActiveCards, 
     pokemonCards, setPokemonCards,
-    setLoadedImageCount, 
-    timer, setTimer,
-    setNoClickEvents }) {
-
+    loadedImageCountRef, mode,
+    gameState, setGameState}) 
+{   
+    const totalImagesToLoad = mode * 2;
+ 
     function handleClick() {         
         if (disabled) return;
 
@@ -30,12 +31,19 @@ export default function Card({
         setActiveCards([...activeCards, currentPokemon])
     }
 
+    const handleOnLoad = () => {
+        loadedImageCountRef.current += 1;
+        if (loadedImageCountRef.current === totalImagesToLoad) {
+            setGameState({...gameState, isLoaded: true})
+        }
+    }
+
     return (
         <Tilt tiltEnable={!disabled} transitionSpeed={600} perspective={1000} scale={1.02} tiltMaxAngleX={0} tiltMaxAngleY={20}>
             <div className="card" onClick={handleClick}>
                 <div className={visible ? 'card-faceup' : 'hidden'}>
                     <h3>{name}</h3>
-                    <img onLoad={() => {setLoadedImageCount(loadedImageCount => loadedImageCount + 1)}}src={imgUrl}/>
+                    <img onLoad={handleOnLoad} src={imgUrl}/>
                 </div>
             </div>
         </Tilt>

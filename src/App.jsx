@@ -18,12 +18,13 @@ function App() {
     currentPlayer: null,
     playersEntered: false,
     isGameStarted: false,
+    isLoaded: false,
     gameOver: false,
     restartGame: false,
   })
 
   const {playersEntered, gameOver, restartGame} = gameState;
-  
+
   let page = null;
   if (playersEntered === false) {  
     page = <PlayersForm gameState={gameState} setGameState={setGameState}/>

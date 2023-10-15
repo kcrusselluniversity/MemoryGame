@@ -14,6 +14,7 @@ function GameOver({ gameState, setGameState, timer, setTimer, highScore, setHigh
         setGameState({
             ...gameState,
             restartGame: true,
+            isLoaded: false,
             gameOver: false,
             isGameStarted: false,
             currentPlayer: currentPlayer === player1 ? player2 : player1

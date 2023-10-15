@@ -6,14 +6,6 @@ import fetchPokemon from "../utils/fetchPokemon";
 
 const NUMBER_OF_POKEMON = 700;
 
-function addPokemonCardProperties(pokemon) {
-    return {
-        ...pokemon,
-        disabled: false, 
-        visible: false,         
-    }
-}
-
 export default function usePokemonCards(cardQuantity) {
     const [pokemonCards, setPokemonCards] = useState([])
 
@@ -35,4 +27,12 @@ export default function usePokemonCards(cardQuantity) {
     }, [cardQuantity])
 
     return [pokemonCards, setPokemonCards]
+}
+
+function addPokemonCardProperties(pokemon) {
+    return {
+        ...pokemon,
+        disabled: true, 
+        visible: false,         
+    }
 }

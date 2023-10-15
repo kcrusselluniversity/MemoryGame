@@ -1,4 +1,4 @@
-export default function LoadingSpinner({ isLoaded }){
+export default function LoadingSpinner({ gameState: {isLoaded} }){
 
     return <div 
     className={isLoaded ? "displayNone" : "spinnerContainer"}>

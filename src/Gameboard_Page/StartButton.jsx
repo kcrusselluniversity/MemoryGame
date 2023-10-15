@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-function StartButton({isLoaded, handleStart, gameState: {isGameStarted}}) {
+function StartButton({ handleStart, gameState: {isGameStarted, isLoaded }}) {
     const classList = classNames({
         'startButton': isLoaded,
         'visibilityNone': !isLoaded,

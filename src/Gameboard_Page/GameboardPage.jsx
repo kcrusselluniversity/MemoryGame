@@ -1,5 +1,6 @@
 // TODO: FIX REPEATED CODE USING HELPER FUNCTION updatepokemonCards
-// TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + DATA-STRUCTURES INSTEAD
+// TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + CONDITIONAL RENDERING INSTEAD OF HIDING
+// THIS RESULTS IN UNNECCESSARY PAINTING TO THE DOM PER RENDER OF THE COMPONENT
 // TODO: REFACTOR CSS LAYOUT EG (GRID) TO BE SPECIFIC TO EACH PAGE INSTEAD OF SETTING IT ON THE ROOT ELEMENT
 
 import { useEffect, useState } from "react";
@@ -18,12 +19,9 @@ function GameboardPage({
     highScore }) 
 {
     const {mode} = gameState;
+    const {isLoaded} = gameState;
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
-    
-    const [noClickEvents, setNoClickEvents] = useState(true);
-    const [loadedImageCount, setLoadedImageCount] = useState(0);
-    const [isLoaded, setIsLoaded] = useState(false);
     const [pokemonCards, setPokemonCards] = usePokemonCards(mode);
     
     function handleStart() {
@@ -31,14 +29,11 @@ function GameboardPage({
             ...gameState,
             isGameStarted: true
         })
-        setNoClickEvents(false)
+        setPokemonCards(pokemonCards.map(pokemon => {
+            return {...pokemon, disabled: false}
+        }))
         setTimer([...timer, new Date()])
     }
-    
-    useEffect(() => {
-        const loadCondition = loadedImageCount === 2 * mode;
-        setIsLoaded(loadCondition)
-    }, [loadedImageCount])
 
     useEffect(() => {
         if (activeCards.length == 1) {
@@ -102,33 +97,32 @@ function GameboardPage({
         }
     }, [seenPokemon])
 
+    
+    useEffect(() => {
+        if (pokemonCards.length > 0 && pokemonCards.length/2 === seenPokemon.length) {
+            setGameState({...gameState, gameOver: true})
+        }
+    }, [seenPokemon])
+    
     const stateProps = {
         activeCards, 
         setActiveCards,
         pokemonCards,
         setPokemonCards,
-        loadedImageCount,
-        setLoadedImageCount,
-        timer, setTimer,
-        setNoClickEvents}
-
-    useEffect(() => {
-    if (pokemonCards.length > 0 && pokemonCards.length/2 === seenPokemon.length) {
-            setGameState({...gameState, gameOver: true})
-        }
-    }, [seenPokemon])
+        timer, setTimer};
     
     return (
         <>
-            <PlayersDisplay gameState={gameState} setGameState={setGameState}/>
-            <HighScoreDisplay highScore={highScore} />
-            <StartButton isLoaded={isLoaded} handleStart={handleStart} gameState={gameState}/>
-            <LoadingSpinner isLoaded={isLoaded} />
+            <LoadingSpinner gameState={gameState} />
+            {isLoaded && <>
+                <PlayersDisplay gameState={gameState} setGameState={setGameState}/>
+                <HighScoreDisplay highScore={highScore} />
+            </>}
+            <StartButton handleStart={handleStart} gameState={gameState}/>
             <Gameboard 
                 gameState={gameState}
+                setGameState={setGameState}
                 pokemonCards={pokemonCards} 
-                isLoaded={isLoaded}
-                noClickEvents={noClickEvents}
                 stateProps={stateProps}
             />
         </>)         
