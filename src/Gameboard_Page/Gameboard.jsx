@@ -2,8 +2,8 @@
 // IT AS A CARD
 
 import classNames from "classnames";
-import Card from "./Card";
-import { HARD_MODE, MEDIUM_MODE } from "./App";
+import Card from "../Card";
+import { HARD_MODE, MEDIUM_MODE } from "../App";
 
 export default function Gameboard({ 
     gameList, 

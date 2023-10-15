@@ -1,4 +1,4 @@
-import GameboardPage from './GameboardPage'
+import GameboardPage from './Gameboard_Page'
 import PlayersForm from './PlayersForm'
 import GameOver from './GameOver'
 import './App.css'

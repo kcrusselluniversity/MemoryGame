@@ -3,7 +3,7 @@
 // TODO: REFACTOR CSS LAYOUT EG (GRID) TO BE SPECIFIC TO EACH PAGE INSTEAD OF SETTING IT ON THE ROOT ELEMENT
 
 import { useEffect, useState } from "react";
-import useGameList from "./useGameList";
+import useGameList from "../hooks/useGameList";
 import LoadingSpinner from "./LoadingSpinner";
 import PlayersDisplay from "./PlayersDisplay";
 import HighScoreDisplay from "./HighScoreDisplay";

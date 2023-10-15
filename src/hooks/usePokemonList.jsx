@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import randomNumberArray from "./utils/randomNumberArray";
-import fetchPokemon from "./utils/fetchPokemon";
+import randomNumberArray from "../utils/randomNumberArray";
+import fetchPokemon from "../utils/fetchPokemon";
 
 const NUMBER_OF_POKEMON = 700;
 
