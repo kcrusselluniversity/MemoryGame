@@ -9,6 +9,8 @@ export const MEDIUM_MODE = 6;
 export const HARD_MODE = 9;
 
 function App() {
+  const [timer, setTimer] = useState([]);
+  const [highScore, setHighScore] = useState({time: null, player: null})
   const [gameState, setGameState] = useState({
     mode: EASY_MODE,
     player1: null,
@@ -20,9 +22,8 @@ function App() {
     restartGame: false,
   })
 
+  
   const {playersEntered, gameOver, restartGame} = gameState;
-  const [timer, setTimer] = useState([]);
-  const [highScore, setHighScore] = useState({time: null, player: null})
   
   let page = null;
   if (playersEntered === false) {  
