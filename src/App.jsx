@@ -22,7 +22,6 @@ function App() {
     restartGame: false,
   })
 
-  
   const {playersEntered, gameOver, restartGame} = gameState;
   
   let page = null;

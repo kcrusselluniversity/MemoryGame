@@ -8,7 +8,7 @@ import Tilt from 'react-parallax-tilt';
 export default function Card({ 
     name, imgUrl, disabled, visible, id, 
     activeCards, setActiveCards, 
-    gameList, setGameList,
+    pokemonCards, setPokemonCards,
     setLoadedImageCount, 
     timer, setTimer,
     setNoClickEvents }) {
@@ -17,16 +17,16 @@ export default function Card({
         if (disabled) return;
 
         // Current pokemon
-        const currentPokemon = gameList.find(pokemon => pokemon.id === id)
+        const currentPokemon = pokemonCards.find(pokemon => pokemon.id === id)
 
         // Make current pokemon visible and disable functionality of all cards
-        const updatedGameList = gameList.map(pokemon => {
+        const updatedpokemonCards = pokemonCards.map(pokemon => {
             pokemon.disabled = true
             if (pokemon.id === id) pokemon.visible = true
             return pokemon
         })
         
-        setGameList(updatedGameList)
+        setPokemonCards(updatedpokemonCards)
         setActiveCards([...activeCards, currentPokemon])
     }
 

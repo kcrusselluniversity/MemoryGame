@@ -1,9 +1,9 @@
-// TODO: FIX REPEATED CODE USING HELPER FUNCTION updateGameList
+// TODO: FIX REPEATED CODE USING HELPER FUNCTION updatepokemonCards
 // TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + DATA-STRUCTURES INSTEAD
 // TODO: REFACTOR CSS LAYOUT EG (GRID) TO BE SPECIFIC TO EACH PAGE INSTEAD OF SETTING IT ON THE ROOT ELEMENT
 
 import { useEffect, useState } from "react";
-import useGameList from "../hooks/useGameList";
+import usePokemonCards from "../hooks/usePokemonCards";
 import LoadingSpinner from "./LoadingSpinner";
 import PlayersDisplay from "./PlayersDisplay";
 import HighScoreDisplay from "./HighScoreDisplay";
@@ -24,7 +24,7 @@ function GameboardPage({
     const [noClickEvents, setNoClickEvents] = useState(true);
     const [loadedImageCount, setLoadedImageCount] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [gameList, setGameList] = useGameList(mode);
+    const [pokemonCards, setPokemonCards] = usePokemonCards(mode);
     
     function handleStart() {
         setGameState({
@@ -45,11 +45,11 @@ function GameboardPage({
             const activePokemon = activeCards[0]
             
             // Reenable all cards except for the active card
-            const updatedGameList = gameList.map(pokemon => {
+            const updatedpokemonCards = pokemonCards.map(pokemon => {
                 pokemon.disabled = pokemon.id === activePokemon.id ? true : false
                 return pokemon
             })
-            setGameList(updatedGameList)
+            setPokemonCards(updatedpokemonCards)
         }
 
         if (activeCards.length == 2) {        
@@ -60,23 +60,23 @@ function GameboardPage({
                     setSeenPokemon([...seenPokemon, firstCard.name]);
 
                     // Reenable all cards except for the two active cards (as they match)
-                    const updatedGameList = gameList.map(pokemon => {
+                    const updatedpokemonCards = pokemonCards.map(pokemon => {
                         if (pokemon.id != firstCard.id && pokemon.id != secondCard.id && !seenPokemon.find(seen => seen == pokemon.name)) {
                             pokemon.disabled = false;
                             pokemon.visible = false;
                         }    
                         return pokemon
                     })
-                    setGameList(updatedGameList);               
+                    setPokemonCards(updatedpokemonCards);               
                 }
 
-                const updatedGameList = gameList.map(pokemon => {
+                const updatedpokemonCards = pokemonCards.map(pokemon => {
                     pokemon.disabled = false;
                     if (!seenPokemon.find(seen => seen == pokemon.name)) pokemon.visible = false;    
                     return pokemon
                 })
 
-                setGameList(updatedGameList);   
+                setPokemonCards(updatedpokemonCards);   
                 setActiveCards([]);
             }, 300)
         }
@@ -85,18 +85,18 @@ function GameboardPage({
     useEffect(() => {
         // Disable seen Pokemon and let them be visible anytime seenPokemon
         // is updated
-        const updatedList = gameList.map(pokemon => {
+        const updatedList = pokemonCards.map(pokemon => {
             if (seenPokemon.includes(pokemon.name)) {
                 pokemon.visible = true;
                 pokemon.disabled = true;
             }
             return pokemon
         })
-        setGameList(updatedList)
+        setPokemonCards(updatedList)
     }, [seenPokemon])
 
     useEffect(() => {
-        if ((seenPokemon.length === gameList.length/2) && seenPokemon.length > 0) {
+        if ((seenPokemon.length === pokemonCards.length/2) && seenPokemon.length > 0) {
             setTimer(timer => [...timer, new Date()])
             setGameState({...gameState, gameOver: true})
         }
@@ -105,15 +105,15 @@ function GameboardPage({
     const stateProps = {
         activeCards, 
         setActiveCards,
-        gameList,
-        setGameList,
+        pokemonCards,
+        setPokemonCards,
         loadedImageCount,
         setLoadedImageCount,
         timer, setTimer,
         setNoClickEvents}
 
     useEffect(() => {
-    if (gameList.length > 0 && gameList.length/2 === seenPokemon.length) {
+    if (pokemonCards.length > 0 && pokemonCards.length/2 === seenPokemon.length) {
             setGameState({...gameState, gameOver: true})
         }
     }, [seenPokemon])
@@ -126,7 +126,7 @@ function GameboardPage({
             <LoadingSpinner isLoaded={isLoaded} />
             <Gameboard 
                 gameState={gameState}
-                gameList={gameList} 
+                pokemonCards={pokemonCards} 
                 isLoaded={isLoaded}
                 noClickEvents={noClickEvents}
                 stateProps={stateProps}

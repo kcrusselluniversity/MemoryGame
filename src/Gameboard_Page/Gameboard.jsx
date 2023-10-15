@@ -6,7 +6,7 @@ import Card from "../Card";
 import { HARD_MODE, MEDIUM_MODE } from "../App";
 
 export default function Gameboard({ 
-    gameList, 
+    pokemonCards, 
     isLoaded, 
     noClickEvents, 
     stateProps, 
@@ -20,7 +20,7 @@ export default function Gameboard({
     });
 
     return <div className={classList}>
-    {gameList.map(pokemon => 
+    {pokemonCards.map(pokemon => 
         <Card 
             key={pokemon.id} 
             name={pokemon.name} 

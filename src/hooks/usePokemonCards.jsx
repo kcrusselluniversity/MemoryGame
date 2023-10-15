@@ -14,13 +14,11 @@ function addPokemonCardProperties(pokemon) {
     }
 }
 
-export default function useGameList(cardQuantity) {
-    // const [pokemonCards, setPokemonCards] = useState([])
-    const [gameList, setGameList] = useState([])
-
-    const randomPokemonIdArray = randomNumberArray(NUMBER_OF_POKEMON, cardQuantity);
+export default function usePokemonCards(cardQuantity) {
+    const [pokemonCards, setPokemonCards] = useState([])
 
     useEffect(() => {
+        const randomPokemonIdArray = randomNumberArray(NUMBER_OF_POKEMON, cardQuantity);
         const promisesArray = randomPokemonIdArray.map(randomId => fetchPokemon(randomId));
         
         Promise.all(promisesArray)
@@ -29,12 +27,12 @@ export default function useGameList(cardQuantity) {
                 // Make double of each pokemon and shuffle the array
                 const shuffledCards = shuffle([...pokemonArray, ...pokemonArray]);
                 
-                // Add a unique ID to each card and update gameList
-                setGameList(shuffledCards.map(pokemon => {
+                // Add a unique ID to each card and update pokemonCards
+                setPokemonCards(shuffledCards.map(pokemon => {
                     return {...pokemon, id: uuidv4()}
                 }))   
             })
     }, [cardQuantity])
 
-    return [gameList, setGameList]
+    return [pokemonCards, setPokemonCards]
 }
