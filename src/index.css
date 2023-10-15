@@ -1,4 +1,4 @@
-/* TODO: CLEAN UP CSS CLASSNAMES AND ORGANISE INTO SECTIONS BASED ON COMPONENT,
+/* TODO: CLEAN UP CSS CLASSNAMES AND ORGANISE INTO GROUPS BASED ON COMPONENT,
 LAYOUT, ETC */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -85,7 +85,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* CARD COMPONENT STYLING */
+/* SECTION: CARD COMPONENT STYLING */
 .card {
   width: var(--card-width);
   height: calc(var(--card-width) * var(--card-aspect-ratio));
@@ -142,7 +142,7 @@ button:focus-visible {
   }
 }
 
-/* PLAYERS FORM PAGE STYLING */
+/* SECTION: PLAYERS FORM PAGE STYLING */
 form {
   display: flex;
   flex-direction: column;
@@ -188,9 +188,10 @@ input[type="radio"]:checked + .radio-indicator {
   font-weight: 500;
 }
 
-/* GAMEBOARD PAGE STYING */
+/* SECTION: GAMEBOARD PAGE STYING */
 .gameboard {
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   align-content: center;
   gap: 1rem;
@@ -226,7 +227,7 @@ input[type="radio"]:checked + .radio-indicator {
   margin-top: 4rem;
 }
 
-/* PLAYER CONTAINER COMPONENT STYLING */
+/* SECTION: PLAYER CONTAINER COMPONENT STYLING */
 .playerContainer {
   display: flex;
   align-items: center;
@@ -246,7 +247,7 @@ input[type="radio"]:checked + .radio-indicator {
   font-size: 2rem;
 }
 
-/* UTIL CLASSES */
+/* SECTION: UTIL CLASSES */
 .hidden {
   display: none;
 }

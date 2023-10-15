@@ -7,7 +7,6 @@ import usePokemonCards from "../hooks/usePokemonCards";
 import LoadingSpinner from "./LoadingSpinner";
 import PlayersDisplay from "./PlayersDisplay";
 import HighScoreDisplay from "./HighScoreDisplay";
-import StartButton from "./StartButton";
 import Gameboard from "./Gameboard";
 
 function GameboardPage({ 
@@ -22,17 +21,6 @@ function GameboardPage({
     const [activeCards, setActiveCards] = useState([]);
     const [seenPokemon, setSeenPokemon] = useState([]);
     const [pokemonCards, setPokemonCards] = usePokemonCards(mode);
-    
-    function handleStart() {
-        setGameState({
-            ...gameState,
-            isGameStarted: true
-        })
-        setPokemonCards(pokemonCards.map(pokemon => {
-            return {...pokemon, disabled: false}
-        }))
-        setTimer([...timer, new Date()])
-    }
 
     useEffect(() => {
         if (activeCards.length == 1) {
@@ -103,12 +91,12 @@ function GameboardPage({
                 <PlayersDisplay gameState={gameState} setGameState={setGameState}/>
                 <HighScoreDisplay highScore={highScore} />
             </>}
-            <StartButton handleStart={handleStart} gameState={gameState}/>
             <Gameboard 
                 gameState={gameState}
                 setGameState={setGameState}
                 pokemonCardsState={{pokemonCards, setPokemonCards}}
                 activeCardsState={{activeCards, setActiveCards}}
+                timerState={{timer, setTimer}}
             />
         </>)         
 }

@@ -2,6 +2,7 @@
 // IT AS A CARD
 import classNames from "classnames";
 import Card from "./Card";
+import StartButton from "./StartButton";
 import { HARD_MODE, MEDIUM_MODE } from "../App";
 import { useRef } from "react";
 
@@ -9,10 +10,12 @@ export default function Gameboard({
     gameState,
     setGameState,
     pokemonCardsState,
-    activeCardsState}) 
+    activeCardsState,
+    timerState}) 
 {
     const { pokemonCards, setPokemonCards } = pokemonCardsState;
     const { activeCards, setActiveCards } = activeCardsState;
+    const { timer, setTimer } = timerState;
 
     
     const loadedImageCountRef = useRef(0);
@@ -23,16 +26,28 @@ export default function Gameboard({
         'hardModeMaxWidth': gameState.mode == HARD_MODE 
     });
 
+    function handleStart() {
+        setGameState({
+            ...gameState,
+            isGameStarted: true
+        })
+        setPokemonCards(pokemonCards.map(pokemon => {
+            return {...pokemon, disabled: false}
+        }))
+        setTimer([...timer, new Date()])
+    }
+
     return <div className={classList}>
-    {pokemonCards.map(pokemon => 
-        <Card 
-            key={pokemon.id} 
-            pokemon={pokemon}
-            gameState={gameState}
-            setGameState={setGameState}
-            pokemonCardsState={{pokemonCards, setPokemonCards}}
-            activeCardsState={{activeCards, setActiveCards}}
-            loadedImageCountRef={loadedImageCountRef}
-        />)}
-</div>
+        <StartButton handleStart={handleStart} gameState={gameState}/>
+        {pokemonCards.map(pokemon =>
+            <Card
+                key={pokemon.id}
+                pokemon={pokemon}
+                gameState={gameState}
+                setGameState={setGameState}
+                pokemonCardsState={{pokemonCards, setPokemonCards}}
+                activeCardsState={{activeCards, setActiveCards}}
+                loadedImageCountRef={loadedImageCountRef}
+            />)}
+        </div>
 }
