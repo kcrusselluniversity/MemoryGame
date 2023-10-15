@@ -1,6 +1,9 @@
+import { useAtom } from "jotai";
+import { gameStateAtom } from './atoms/atoms'
 import stopWatch from "./utils/stopwatch";
 
-function GameOver({ gameState, setGameState, timer, setTimer, highScore, setHighScore }) {
+function GameOver({ timer, setTimer, highScore, setHighScore }) {
+    const [gameState, setGameState] = useAtom(gameStateAtom)
     const { player1, player2, currentPlayer } = gameState;
     
     const time = stopWatch(timer[1], timer[0]);

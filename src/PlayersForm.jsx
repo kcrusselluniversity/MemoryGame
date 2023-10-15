@@ -1,9 +1,11 @@
 // TODO: FIX MODE BUTTONS NOT BEING TABBED OVER IN FORM
 import ModeButtons from "./modeButtons";
-import { EASY_MODE } from "./App";
+import { EASY_MODE } from "./atoms/atoms";
+import { useAtom } from "jotai";
+import { gameStateAtom } from './atoms/atoms';
 
-export default function PlayersForm({ gameState, setGameState }) {
-
+export default function PlayersForm() {
+    const [gameState, setGameState] = useAtom(gameStateAtom)
     function handleSubmit(e) {
         e.preventDefault()
 

@@ -1,4 +1,9 @@
-export default function LoadingSpinner({ gameState: {isLoaded} }){
+import { useAtomValue } from 'jotai';
+import { gameStateAtom } from '../atoms/atoms';
+
+export default function LoadingSpinner(){
+    const gameState = useAtomValue(gameStateAtom);
+    const { isLoaded } = gameState;
 
     return <div 
     className={isLoaded ? "displayNone" : "spinnerContainer"}>

@@ -8,14 +8,15 @@ import LoadingSpinner from "./LoadingSpinner";
 import PlayersDisplay from "./PlayersDisplay";
 import HighScoreDisplay from "./HighScoreDisplay";
 import Gameboard from "./Gameboard";
+import { useAtom } from "jotai";
+import { gameStateAtom } from '../atoms/atoms'
 
 function GameboardPage({ 
-    gameState, 
-    setGameState, 
     timer, 
     setTimer, 
     highScore }) 
-{
+{   
+    const [gameState, setGameState] = useAtom(gameStateAtom)
     const {mode} = gameState;
     const {isLoaded} = gameState;
     const [activeCards, setActiveCards] = useState([]);
@@ -86,14 +87,12 @@ function GameboardPage({
     
     return (
         <>
-            <LoadingSpinner gameState={gameState} />
+            <LoadingSpinner />
             {isLoaded && <>
-                <PlayersDisplay gameState={gameState} setGameState={setGameState}/>
+                <PlayersDisplay />
                 <HighScoreDisplay highScore={highScore} />
             </>}
             <Gameboard 
-                gameState={gameState}
-                setGameState={setGameState}
                 pokemonCardsState={{pokemonCards, setPokemonCards}}
                 activeCardsState={{activeCards, setActiveCards}}
                 timerState={{timer, setTimer}}

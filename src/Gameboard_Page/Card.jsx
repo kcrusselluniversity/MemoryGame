@@ -3,15 +3,16 @@
 // TODO: Add the back of the card as an image in the assets and use that
 // for the facedown visible side
 import Tilt from 'react-parallax-tilt';
+import { useAtom } from 'jotai';
+import { gameStateAtom } from '../atoms/atoms';
 
 export default function Card({ 
     pokemon, 
-    gameState, 
-    setGameState,
     pokemonCardsState,
     activeCardsState, 
     loadedImageCountRef }) 
 {   
+    const [gameState, setGameState] = useAtom(gameStateAtom);
     const { name, imgUrl, disabled, visible, id } = pokemon;
     const { pokemonCards, setPokemonCards } = pokemonCardsState;
     const { activeCards, setActiveCards } = activeCardsState;

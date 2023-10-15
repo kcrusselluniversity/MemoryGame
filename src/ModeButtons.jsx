@@ -1,4 +1,4 @@
-import { EASY_MODE, MEDIUM_MODE, HARD_MODE } from "./App";
+import { EASY_MODE, MEDIUM_MODE, HARD_MODE } from "./atoms/atoms";
 
 export default function ModeButtons() {
 

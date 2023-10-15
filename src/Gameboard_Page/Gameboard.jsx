@@ -3,12 +3,12 @@
 import classNames from "classnames";
 import Card from "./Card";
 import StartButton from "./StartButton";
-import { HARD_MODE, MEDIUM_MODE } from "../App";
 import { useRef } from "react";
+import { useAtom } from "jotai";
+import { gameStateAtom } from '../atoms/atoms'
+import { MEDIUM_MODE, HARD_MODE } from "../atoms/atoms";
 
 export default function Gameboard({ 
-    gameState,
-    setGameState,
     pokemonCardsState,
     activeCardsState,
     timerState}) 
@@ -17,7 +17,7 @@ export default function Gameboard({
     const { activeCards, setActiveCards } = activeCardsState;
     const { timer, setTimer } = timerState;
 
-    
+    const [gameState, setGameState] = useAtom(gameStateAtom) 
     const loadedImageCountRef = useRef(0);
 
     const classList = classNames('gameboard', {
@@ -38,13 +38,11 @@ export default function Gameboard({
     }
 
     return <div className={classList}>
-        <StartButton handleStart={handleStart} gameState={gameState}/>
+        <StartButton handleStart={handleStart} />
         {pokemonCards.map(pokemon =>
             <Card
                 key={pokemon.id}
                 pokemon={pokemon}
-                gameState={gameState}
-                setGameState={setGameState}
                 pokemonCardsState={{pokemonCards, setPokemonCards}}
                 activeCardsState={{activeCards, setActiveCards}}
                 loadedImageCountRef={loadedImageCountRef}
