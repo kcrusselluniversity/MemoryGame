@@ -104,13 +104,6 @@ function GameboardPage({
         }
     }, [seenPokemon])
     
-    const stateProps = {
-        activeCards, 
-        setActiveCards,
-        pokemonCards,
-        setPokemonCards,
-        timer, setTimer};
-    
     return (
         <>
             <LoadingSpinner gameState={gameState} />
@@ -122,8 +115,10 @@ function GameboardPage({
             <Gameboard 
                 gameState={gameState}
                 setGameState={setGameState}
-                pokemonCards={pokemonCards} 
-                stateProps={stateProps}
+                pokemonCards={pokemonCards}
+                setPokemonCards={setPokemonCards}
+                activeCards={activeCards}
+                setActiveCards={setActiveCards}
             />
         </>)         
 }

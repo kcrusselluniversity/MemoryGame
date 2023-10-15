@@ -6,12 +6,17 @@
 import Tilt from 'react-parallax-tilt';
 
 export default function Card({ 
-    name, imgUrl, disabled, visible, id, 
-    activeCards, setActiveCards, 
-    pokemonCards, setPokemonCards,
-    loadedImageCountRef, mode,
-    gameState, setGameState}) 
+    pokemon, 
+    gameState, 
+    setGameState,
+    pokemonCards, 
+    setPokemonCards,
+    activeCards, 
+    setActiveCards, 
+    loadedImageCountRef }) 
 {   
+    const { name, imgUrl, disabled, visible, id } = pokemon;
+    const { mode } = gameState;
     const totalImagesToLoad = mode * 2;
  
     function handleClick() {         

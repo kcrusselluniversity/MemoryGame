@@ -7,35 +7,33 @@ import { HARD_MODE, MEDIUM_MODE } from "../App";
 import { useRef } from "react";
 
 export default function Gameboard({ 
-    pokemonCards, 
-    stateProps, gameState, setGameState,
-    gameState: {mode, isLoaded} }) 
+    gameState,
+    setGameState,
+    pokemonCards,
+    setPokemonCards,
+    activeCards,
+    setActiveCards}) 
 {
     const loadedImageCountRef = useRef(0);
 
     const classList = classNames('gameboard', {
-        'displayNone': !isLoaded,
-        'medModeMaxWidth': mode == MEDIUM_MODE,
-        'hardModeMaxWidth': mode == HARD_MODE 
+        'displayNone': !gameState.isLoaded,
+        'medModeMaxWidth': gameState.mode == MEDIUM_MODE,
+        'hardModeMaxWidth': gameState.mode == HARD_MODE 
     });
-
-    console.log('Gameboard rerendered')
-    console.table({gameState, pokemon:pokemonCards.map(p=>p.name)})
 
     return <div className={classList}>
     {pokemonCards.map(pokemon => 
         <Card 
             key={pokemon.id} 
-            name={pokemon.name} 
-            imgUrl={pokemon.imgUrl} 
-            disabled={pokemon.disabled}
-            visible={pokemon.visible}
-            id={pokemon.id}
-            mode={mode}
+            pokemon={pokemon}
             gameState={gameState}
             setGameState={setGameState}
+            pokemonCards={pokemonCards}
+            setPokemonCards={setPokemonCards}
+            activeCards={activeCards} 
+            setActiveCards={setActiveCards} 
             loadedImageCountRef={loadedImageCountRef}
-            {...stateProps}
         />)}
 </div>
 }
