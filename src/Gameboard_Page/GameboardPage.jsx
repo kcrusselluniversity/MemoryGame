@@ -21,10 +21,10 @@ function GameboardPage({
     const {mode} = gameState;
     const {isLoaded} = gameState;
     const [activeCardIds, setActiveCardIds] = useState([]);
-    const [seenPokemon, setSeenPokemon] = useState([]);
+    const [seenPokemonIds, setseenPokemonIdsIds] = useState([]);
     const [pokemonCards, setPokemonCards] = usePokemonCards(mode);
 
-    useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setSeenPokemon, seenPokemon, setTimer);
+    useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setseenPokemonIdsIds, seenPokemonIds, setTimer);
     
     return (
         <>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
 
-export default function useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setSeenPokemon, seenPokemon, setTimer) {
+export default function useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setseenPokemonIdsIds, seenPokemonIds, setTimer) {
     const [gameState, setGameState] = useAtom(gameStateAtom);
 
     // This function reenables call cards except for the active and seen cards
@@ -29,11 +29,11 @@ export default function useGameLogic(activeCardIds, setActiveCardIds, pokemonCar
                 const [firstCard, secondCard] = activeCardIds;
                 if (firstCard.name === secondCard.name) {
                     // Add this pokemon to seen
-                    setSeenPokemon([...seenPokemon, firstCard.name]);
+                    setseenPokemonIdsIds([...seenPokemonIds, firstCard.name]);
 
                     // Reenable all cards except for the two active cards (as they match)
                     const updatedPokemonCards = pokemonCards.map(pokemon => {
-                        if (pokemon.id != firstCard.id && pokemon.id != secondCard.id && !seenPokemon.find(seen => seen == pokemon.name)) {
+                        if (pokemon.id != firstCard.id && pokemon.id != secondCard.id && !seenPokemonIds.find(seen => seen == pokemon.name)) {
                             pokemon.disabled = false;
                             pokemon.visible = false;
                         }
@@ -44,7 +44,7 @@ export default function useGameLogic(activeCardIds, setActiveCardIds, pokemonCar
 
                 const updatedPokemonCards = pokemonCards.map(pokemon => {
                     pokemon.disabled = false;
-                    if (!seenPokemon.find(seen => seen == pokemon.name)) pokemon.visible = false;
+                    if (!seenPokemonIds.find(seen => seen == pokemon.name)) pokemon.visible = false;
                     return pokemon;
                 });
 
@@ -55,23 +55,23 @@ export default function useGameLogic(activeCardIds, setActiveCardIds, pokemonCar
     }, [activeCardIds]);
 
     useEffect(() => {
-        // Disable seen Pokemon and let them be visible anytime seenPokemon
+        // Disable seen Pokemon and let them be visible anytime seenPokemonIds
         // is updated
         const updatedList = pokemonCards.map(pokemon => {
-            if (seenPokemon.includes(pokemon.name)) {
+            if (seenPokemonIds.includes(pokemon.name)) {
                 pokemon.visible = true;
                 pokemon.disabled = true;
             }
             return pokemon;
         });
         setPokemonCards(updatedList);
-    }, [seenPokemon]);
+    }, [seenPokemonIds]);
 
     useEffect(() => {
-        if ((seenPokemon.length === pokemonCards.length / 2) && seenPokemon.length > 0) {
+        if ((seenPokemonIds.length === pokemonCards.length / 2) && seenPokemonIds.length > 0) {
             setTimer(timer => [...timer, new Date()]);
             setGameState({ ...gameState, gameOver: true });
         }
-    }, [seenPokemon]);
+    }, [seenPokemonIds]);
 }
 
