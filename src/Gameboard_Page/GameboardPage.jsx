@@ -1,4 +1,3 @@
-// TODO: FIX REPEATED CODE USING HELPER FUNCTION updatepokemonCards
 // TODO: FIX USING CSS TO CONTROL EVERYTHING - COULD USE STATE + CONDITIONAL RENDERING INSTEAD OF HIDING
 // THIS RESULTS IN UNNECCESSARY PAINTING TO THE DOM PER RENDER OF THE COMPONENT
 // TODO: REFACTOR CSS LAYOUT EG (GRID) TO BE SPECIFIC TO EACH PAGE INSTEAD OF SETTING IT ON THE ROOT ELEMENT
@@ -115,10 +114,8 @@ function GameboardPage({
             <Gameboard 
                 gameState={gameState}
                 setGameState={setGameState}
-                pokemonCards={pokemonCards}
-                setPokemonCards={setPokemonCards}
-                activeCards={activeCards}
-                setActiveCards={setActiveCards}
+                pokemonCardsState={{pokemonCards, setPokemonCards}}
+                activeCardsState={{activeCards, setActiveCards}}
             />
         </>)         
 }

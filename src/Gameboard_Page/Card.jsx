@@ -2,20 +2,19 @@
 // when the card flips over
 // TODO: Add the back of the card as an image in the assets and use that
 // for the facedown visible side
-
 import Tilt from 'react-parallax-tilt';
 
 export default function Card({ 
     pokemon, 
     gameState, 
     setGameState,
-    pokemonCards, 
-    setPokemonCards,
-    activeCards, 
-    setActiveCards, 
+    pokemonCardsState,
+    activeCardsState, 
     loadedImageCountRef }) 
 {   
     const { name, imgUrl, disabled, visible, id } = pokemon;
+    const { pokemonCards, setPokemonCards } = pokemonCardsState;
+    const { activeCards, setActiveCards } = activeCardsState;
     const { mode } = gameState;
     const totalImagesToLoad = mode * 2;
  

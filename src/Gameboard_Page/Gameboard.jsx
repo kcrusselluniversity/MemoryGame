@@ -1,6 +1,5 @@
 // FIX BUG WHERE YOU CAN CLICK ON A FACEUP CARD AND IT ACCEPTS
 // IT AS A CARD
-
 import classNames from "classnames";
 import Card from "./Card";
 import { HARD_MODE, MEDIUM_MODE } from "../App";
@@ -9,11 +8,13 @@ import { useRef } from "react";
 export default function Gameboard({ 
     gameState,
     setGameState,
-    pokemonCards,
-    setPokemonCards,
-    activeCards,
-    setActiveCards}) 
+    pokemonCardsState,
+    activeCardsState}) 
 {
+    const { pokemonCards, setPokemonCards } = pokemonCardsState;
+    const { activeCards, setActiveCards } = activeCardsState;
+
+    
     const loadedImageCountRef = useRef(0);
 
     const classList = classNames('gameboard', {
@@ -29,10 +30,8 @@ export default function Gameboard({
             pokemon={pokemon}
             gameState={gameState}
             setGameState={setGameState}
-            pokemonCards={pokemonCards}
-            setPokemonCards={setPokemonCards}
-            activeCards={activeCards} 
-            setActiveCards={setActiveCards} 
+            pokemonCardsState={{pokemonCards, setPokemonCards}}
+            activeCardsState={{activeCards, setActiveCards}}
             loadedImageCountRef={loadedImageCountRef}
         />)}
 </div>
