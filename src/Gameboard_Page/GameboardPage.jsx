@@ -95,13 +95,6 @@ function GameboardPage({
             setGameState({...gameState, gameOver: true})
         }
     }, [seenPokemon])
-
-    
-    useEffect(() => {
-        if (pokemonCards.length > 0 && pokemonCards.length/2 === seenPokemon.length) {
-            setGameState({...gameState, gameOver: true})
-        }
-    }, [seenPokemon])
     
     return (
         <>
