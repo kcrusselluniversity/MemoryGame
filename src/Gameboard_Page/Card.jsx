@@ -3,6 +3,7 @@
 // TODO: Add the back of the card as an image in the assets and use that
 // for the facedown visible side
 import Tilt from "react-parallax-tilt";
+import cardBack from "../resources/card_back_med.png";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
 
@@ -38,8 +39,10 @@ export default function Card({
             perspective={1000}
             scale={1.02}
             tiltMaxAngleX={0}
-            tiltMaxAngleY={20}
+            tiltMaxAngleY={40}
+            style={{ position: "relative" }}
         >
+            <img className="card--back" src={cardBack} />
             <div className="card" onClick={handleClick}>
                 <div className={visible ? "card-faceup" : "hidden"}>
                     <h3>{name}</h3>

@@ -7,7 +7,7 @@ LAYOUT, ETC */
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: black;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,8 +19,9 @@ LAYOUT, ETC */
   --grid-width: 220px;
   --grid-height: 220px;
 
-  --card-width: 140px;
-  --card-aspect-ratio: 1.4;
+  --card-width: 128px;
+  --card-aspect-ratio: 1.40;
+  --card-back-scale-factor: 1.01;
   --pokemon-img-width: 130px;
   --border-color-hover: #646cff;
 }
@@ -90,7 +91,7 @@ button:focus-visible {
   width: var(--card-width);
   height: calc(var(--card-width) * var(--card-aspect-ratio));
   background-color: white;
-  border: 4px solid #4caeff;
+  border: none;
   border-radius: 8px;
 }
 
@@ -101,6 +102,15 @@ button:focus-visible {
   align-items: center;
   justify-content: space-evenly;
 
+}
+
+.card--back {
+  width: var(--card-width);
+  height: calc(var(--card-width) * var(--card-aspect-ratio) * var(--card-back-scale-factor));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .card img {
   height: var(--pokemon-img-width);
@@ -199,7 +209,7 @@ input[type="radio"]:checked + .radio-indicator {
   justify-content: center;
   grid-row-start: 5;
   align-self: start;
-  max-width: 800px;
+  max-width: 700px;
   margin-bottom: 1rem;
 }
 
