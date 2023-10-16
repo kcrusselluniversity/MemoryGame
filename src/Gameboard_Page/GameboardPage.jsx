@@ -12,18 +12,15 @@ import { useAtomValue } from "jotai";
 import { gameStateAtom } from '../atoms/atoms';
 import useGameLogic from "../hooks/useGameLogic";
 
-function GameboardPage({ 
-    timer, 
-    setTimer, 
-    highScore }) 
-{   
+function GameboardPage({ timerState, highScore }){   
     const gameState = useAtomValue(gameStateAtom)
     const {mode} = gameState;
     const {isLoaded} = gameState;
+    const { timer, setTimer } = timerState;
     const [activeCardIds, setActiveCardIds] = useState([]);
     const [seenPokemonIds, setSeenPokemonIds] = useState([]);
     const [pokemonCards, setPokemonCards] = usePokemonCards(mode);
-    // console.log('activeCardIds: ',activeCardIds)
+    
     useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setSeenPokemonIds, seenPokemonIds, setTimer);
     
     return (

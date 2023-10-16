@@ -16,16 +16,9 @@ function App() {
   if (playersEntered === false) {  
     page = <PlayersForm/>
   } else if (gameOver === true) {
-    page = <GameOver
-      timer={timer} 
-      setTimer={setTimer} 
-      highScore={highScore} 
-      setHighScore={setHighScore}/> 
+    page = <GameOver timerState={{timer, setTimer}} highScoreState={{highScore, setHighScore}}/> 
   } else if (gameOver === false || restartGame === true) {
-    page = <GameboardPage 
-      timer={timer} 
-      setTimer={setTimer} 
-      highScore={highScore}/>
+    page = <GameboardPage timerState={{timer, setTimer}} highScore={highScore}/>
   }
   return (
     <>
