@@ -32,21 +32,27 @@ export default function Card({
         }
     };
 
+    const tiltProps = {
+        tiltEnable: !disabled,
+        transitionSpeed: 600,
+        perspective: 1000,
+        scale: 1.02,
+        tiltMaxAngleX: 0,
+        tiltMaxAngleY: 40,
+        style: { position: "relative" },
+    };
+
     return (
-        <Tilt
-            tiltEnable={!disabled}
-            transitionSpeed={600}
-            perspective={1000}
-            scale={1.02}
-            tiltMaxAngleX={0}
-            tiltMaxAngleY={40}
-            style={{ position: "relative" }}
-        >
-            <img className="card--back" src={cardBack} />
+        <Tilt {...tiltProps}>
             <div className="card" onClick={handleClick}>
+                {!visible && <img className="card--back" src={cardBack} />}
                 <div className={visible ? "card-faceup" : "hidden"}>
                     <h3>{name}</h3>
-                    <img onLoad={handleOnLoad} src={imgUrl} />
+                    <img
+                        className="card-faceup--image"
+                        onLoad={handleOnLoad}
+                        src={imgUrl}
+                    />
                 </div>
             </div>
         </Tilt>

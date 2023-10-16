@@ -112,7 +112,7 @@ button:focus-visible {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.card img {
+.card-faceup--image {
   height: var(--pokemon-img-width);
   width: var(--pokemon-img-width);
 }
@@ -204,7 +204,7 @@ input[type="radio"]:checked + .radio-indicator {
   position: relative;
   flex-wrap: wrap;
   align-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 80vw;
   justify-content: center;
   grid-row-start: 5;

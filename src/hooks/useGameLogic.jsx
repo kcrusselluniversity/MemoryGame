@@ -62,7 +62,7 @@ export default function useGameLogic(
                     }
 
                     setActiveCardIds([]);
-                }, 200);
+                }, 300);
                 break;
         }
     }, [activeCardIds]);
