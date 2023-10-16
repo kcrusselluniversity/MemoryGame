@@ -22,18 +22,18 @@ export default function Card({
     function handleClick() {         
         if (disabled) return;
 
-        // Current pokemon
-        const currentPokemon = pokemonCards.find(pokemon => pokemon.id === id)
+        // Update active Cards 
+        setActiveCardIds([...activeCardIds, id])
 
         // Make current pokemon visible and disable functionality of all cards
-        const updatedpokemonCards = pokemonCards.map(pokemon => {
-            pokemon.disabled = true
-            if (pokemon.id === id) pokemon.visible = true
-            return pokemon
-        })
+        // const updatedpokemonCards = pokemonCards.map(pokemon => {
+        //     pokemon.disabled = true
+        //     if (pokemon.id === id) pokemon.visible = true
+        //     return pokemon
+        // })
         
-        setPokemonCards(updatedpokemonCards)
-        setActiveCardIds([...activeCardIds, currentPokemon])
+        // setPokemonCards(updatedpokemonCards)
+        // setActiveCardIds([...activeCardIds, currentPokemon.id])
     }
 
     const handleOnLoad = () => {

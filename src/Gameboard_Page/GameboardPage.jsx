@@ -23,7 +23,7 @@ function GameboardPage({
     const [activeCardIds, setActiveCardIds] = useState([]);
     const [seenPokemonIds, setSeenPokemonIds] = useState([]);
     const [pokemonCards, setPokemonCards] = usePokemonCards(mode);
-
+    // console.log('activeCardIds: ',activeCardIds)
     useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setSeenPokemonIds, seenPokemonIds, setTimer);
     
     return (
