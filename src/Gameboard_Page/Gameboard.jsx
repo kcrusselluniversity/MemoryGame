@@ -43,7 +43,6 @@ export default function Gameboard({
             <Card
                 key={pokemon.id}
                 pokemon={pokemon}
-                pokemonCardsState={{pokemonCards, setPokemonCards}}
                 activeCardIdsState={{activeCardIds, setActiveCardIds}}
                 loadedImageCountRef={loadedImageCountRef}
             />)

@@ -8,13 +8,11 @@ import { gameStateAtom } from '../atoms/atoms';
 
 export default function Card({ 
     pokemon, 
-    pokemonCardsState,
     activeCardIdsState, 
     loadedImageCountRef }) 
 {   
     const [gameState, setGameState] = useAtom(gameStateAtom);
     const { name, imgUrl, disabled, visible, id } = pokemon;
-    const { pokemonCards, setPokemonCards } = pokemonCardsState;
     const { activeCardIds, setActiveCardIds } = activeCardIdsState;
     const { mode } = gameState;
     const totalImagesToLoad = mode * 2;
@@ -24,16 +22,6 @@ export default function Card({
 
         // Update active Cards 
         setActiveCardIds([...activeCardIds, id])
-
-        // Make current pokemon visible and disable functionality of all cards
-        // const updatedpokemonCards = pokemonCards.map(pokemon => {
-        //     pokemon.disabled = true
-        //     if (pokemon.id === id) pokemon.visible = true
-        //     return pokemon
-        // })
-        
-        // setPokemonCards(updatedpokemonCards)
-        // setActiveCardIds([...activeCardIds, currentPokemon.id])
     }
 
     const handleOnLoad = () => {
