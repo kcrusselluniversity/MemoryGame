@@ -1,38 +1,42 @@
 import { useAtom } from "jotai";
-import { gameStateAtom } from './atoms/atoms'
+import { gameStateAtom } from "./atoms/atoms";
 import stopWatch from "./utils/stopwatch";
 
 function GameOver({ timerState, highScoreState }) {
-    const [gameState, setGameState] = useAtom(gameStateAtom)
+    const [gameState, setGameState] = useAtom(gameStateAtom);
     const { player1, player2, currentPlayer } = gameState;
     const { timer, setTimer } = timerState;
     const { highScore, setHighScore } = highScoreState;
-    
+
     const timeString = stopWatch(timer[1], timer[0]);
     const timeInt = parseFloat(timeString);
-    
+
     function handleRestart() {
         if (highScore.time === null || timeInt < highScore.time) {
-            setHighScore({time: timeInt, player: currentPlayer})
+            setHighScore({ time: timeInt, player: currentPlayer });
         }
 
-        setTimer([])
+        setTimer([]);
         setGameState({
             ...gameState,
             restartGame: true,
             isLoaded: false,
             gameOver: false,
             isGameStarted: false,
-            currentPlayer: currentPlayer === player1 ? player2 : player1
-        })
-    }   
+            currentPlayer: currentPlayer === player1 ? player2 : player1,
+        });
+    }
 
     return (
         <>
-            <h1 className="playerGametime">{currentPlayer}: {timeString} seconds</h1>
-            <button className='restartButton' onClick={handleRestart}>Restart</button>
+            <h1 className="playerGametime">
+                {currentPlayer}: {timeString} seconds
+            </h1>
+            <button className="restartButton" onClick={handleRestart}>
+                Restart
+            </button>
         </>
-    )
+    );
 }
 
-export default GameOver
+export default GameOver;

@@ -2,43 +2,50 @@
 // when the card flips over
 // TODO: Add the back of the card as an image in the assets and use that
 // for the facedown visible side
-import Tilt from 'react-parallax-tilt';
-import { useAtom } from 'jotai';
-import { gameStateAtom } from '../atoms/atoms';
+import Tilt from "react-parallax-tilt";
+import { useAtom } from "jotai";
+import { gameStateAtom } from "../atoms/atoms";
 
-export default function Card({ 
-    pokemon, 
-    activeCardIdsState, 
-    loadedImageCountRef }) 
-{   
+export default function Card({
+    pokemon,
+    activeCardIdsState,
+    loadedImageCountRef,
+}) {
     const [gameState, setGameState] = useAtom(gameStateAtom);
     const { name, imgUrl, disabled, visible, id } = pokemon;
     const { activeCardIds, setActiveCardIds } = activeCardIdsState;
     const { mode } = gameState;
     const totalImagesToLoad = mode * 2;
- 
-    function handleClick() {         
+
+    function handleClick() {
         if (disabled) return;
 
-        // Update active Cards 
-        setActiveCardIds([...activeCardIds, id])
+        // Update active Cards
+        setActiveCardIds([...activeCardIds, id]);
     }
 
     const handleOnLoad = () => {
         loadedImageCountRef.current += 1;
         if (loadedImageCountRef.current === totalImagesToLoad) {
-            setGameState({...gameState, isLoaded: true})
+            setGameState({ ...gameState, isLoaded: true });
         }
-    }
+    };
 
     return (
-        <Tilt tiltEnable={!disabled} transitionSpeed={600} perspective={1000} scale={1.02} tiltMaxAngleX={0} tiltMaxAngleY={20}>
+        <Tilt
+            tiltEnable={!disabled}
+            transitionSpeed={600}
+            perspective={1000}
+            scale={1.02}
+            tiltMaxAngleX={0}
+            tiltMaxAngleY={20}
+        >
             <div className="card" onClick={handleClick}>
-                <div className={visible ? 'card-faceup' : 'hidden'}>
+                <div className={visible ? "card-faceup" : "hidden"}>
                     <h3>{name}</h3>
-                    <img onLoad={handleOnLoad} src={imgUrl}/>
+                    <img onLoad={handleOnLoad} src={imgUrl} />
                 </div>
             </div>
         </Tilt>
-    )
+    );
 }

@@ -2,16 +2,19 @@
 import ModeButtons from "./modeButtons";
 import { EASY_MODE } from "./atoms/atoms";
 import { useAtom } from "jotai";
-import { gameStateAtom } from './atoms/atoms';
+import { gameStateAtom } from "./atoms/atoms";
 
 export default function PlayersForm() {
-    const [gameState, setGameState] = useAtom(gameStateAtom)
+    const [gameState, setGameState] = useAtom(gameStateAtom);
     function handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        const formData = new FormData(e.target)
-        const [playerName1, playerName2] = [formData.get('player1'), formData.get('player2')]
-        const selectedMode = formData.get('mode') || EASY_MODE
+        const formData = new FormData(e.target);
+        const [playerName1, playerName2] = [
+            formData.get("player1"),
+            formData.get("player2"),
+        ];
+        const selectedMode = formData.get("mode") || EASY_MODE;
 
         setGameState({
             ...gameState,
@@ -19,8 +22,8 @@ export default function PlayersForm() {
             player1: playerName1,
             player2: playerName2,
             currentPlayer: playerName1,
-            playersEntered: true
-        })
+            playersEntered: true,
+        });
     }
 
     return (
@@ -32,5 +35,5 @@ export default function PlayersForm() {
             <ModeButtons />
             <button type="submit">Play</button>
         </form>
-    )
+    );
 }

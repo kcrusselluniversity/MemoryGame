@@ -9,33 +9,45 @@ import PlayersDisplay from "./PlayersDisplay";
 import HighScoreDisplay from "./HighScoreDisplay";
 import Gameboard from "./Gameboard";
 import { useAtomValue } from "jotai";
-import { gameStateAtom } from '../atoms/atoms';
+import { gameStateAtom } from "../atoms/atoms";
 import useGameLogic from "../hooks/useGameLogic";
 
-function GameboardPage({ timerState, highScore }){   
-    const gameState = useAtomValue(gameStateAtom)
-    const {mode} = gameState;
-    const {isLoaded} = gameState;
+function GameboardPage({ timerState, highScore }) {
+    const gameState = useAtomValue(gameStateAtom);
+    const { mode } = gameState;
+    const { isLoaded } = gameState;
     const { timer, setTimer } = timerState;
     const [activeCardIds, setActiveCardIds] = useState([]);
     const [seenPokemonIds, setSeenPokemonIds] = useState([]);
     const [pokemonCards, setPokemonCards] = usePokemonCards(mode);
-    
-    useGameLogic(activeCardIds, setActiveCardIds, pokemonCards, setPokemonCards, setSeenPokemonIds, seenPokemonIds, setTimer);
-    
+
+    //  This hook is used to evaluate the game logic after each move is made
+    useGameLogic(
+        activeCardIds,
+        setActiveCardIds,
+        pokemonCards,
+        setPokemonCards,
+        setSeenPokemonIds,
+        seenPokemonIds,
+        setTimer
+    );
+
     return (
         <>
             <LoadingSpinner />
-            {isLoaded && <>
-                <PlayersDisplay />
-                <HighScoreDisplay highScore={highScore} />
-            </>}
-            <Gameboard 
-                pokemonCardsState={{pokemonCards, setPokemonCards}}
-                activeCardIdsState={{activeCardIds, setActiveCardIds}}
-                timerState={{timer, setTimer}}
+            {isLoaded && (
+                <>
+                    <PlayersDisplay />
+                    <HighScoreDisplay highScore={highScore} />
+                </>
+            )}
+            <Gameboard
+                pokemonCardsState={{ pokemonCards, setPokemonCards }}
+                activeCardIdsState={{ activeCardIds, setActiveCardIds }}
+                timerState={{ timer, setTimer }}
             />
-        </>)         
+        </>
+    );
 }
 
-export default GameboardPage
+export default GameboardPage;
