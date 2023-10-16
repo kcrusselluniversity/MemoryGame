@@ -6,11 +6,12 @@ function GameOver({ timer, setTimer, highScore, setHighScore }) {
     const [gameState, setGameState] = useAtom(gameStateAtom)
     const { player1, player2, currentPlayer } = gameState;
     
-    const time = stopWatch(timer[1], timer[0]);
+    const timeString = stopWatch(timer[1], timer[0]);
+    const timeInt = parseFloat(timeString);
     
     function handleRestart() {
-        if (highScore.time === null || time < highScore.time) {
-            setHighScore({time: time, player: currentPlayer})
+        if (highScore.time === null || timeInt < highScore.time) {
+            setHighScore({time: timeInt, player: currentPlayer})
         }
 
         setTimer([])
@@ -26,7 +27,7 @@ function GameOver({ timer, setTimer, highScore, setHighScore }) {
 
     return (
         <>
-            <h1 className="playerGametime">{currentPlayer}: {time} seconds</h1>
+            <h1 className="playerGametime">{currentPlayer}: {timeString} seconds</h1>
             <button className='restartButton' onClick={handleRestart}>Restart</button>
         </>
     )
