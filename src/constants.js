@@ -1,2 +1,2 @@
-export const cardFlipDuration = 400;
+export const cardFlipDuration = 300;
 export const resetCardFlipDuration = 2 * cardFlipDuration;

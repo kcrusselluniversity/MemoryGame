@@ -6,7 +6,7 @@ import Tilt from "react-parallax-tilt";
 import cardBack from "../resources/card_back_med.png";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { cardFlipDuration } from "../constants";
 
 export default function Card({
@@ -16,8 +16,8 @@ export default function Card({
 }) {
     const [gameState, setGameState] = useAtom(gameStateAtom);
     const [isCardFlipped, setIsCardFlipped] = useState(null);
-    const [isCardFlippedBack, setIsCardFlippedBack] = useState(null);
     const { name, imgUrl, disabled, visible, id } = pokemon;
+    const { isFlipBackOver } = pokemon;
     const { activeCardIds, setActiveCardIds } = activeCardIdsState;
     const { mode } = gameState;
     const totalImagesToLoad = mode * 2;
@@ -31,19 +31,8 @@ export default function Card({
         // Update Card flip status for animation to occur
         setIsCardFlipped(true);
 
-        setTimeout(() => setIsCardFlipped(false), cardFlipDuration)
+        setTimeout(() => setIsCardFlipped(false), cardFlipDuration);
     }
-
-    // useEffect(() => {
-    //     if (isCardFlipped) {
-    //         if (activeCardIds.length == 2) {
-    //             setTimeout(() => {
-    //                 setIsCardFlippedBack(true)
-    //                 setTimeout(() => setIsCardFlipped(false), cardFlipDuration)
-    //             }, cardFlipDuration)
-    //         }
-    //     }
-    // }, [visible])
 
     const handleOnLoad = () => {
         loadedImageCountRef.current += 1;
@@ -63,10 +52,18 @@ export default function Card({
     return (
         <Tilt {...tiltProps}>
             <div
-                className={`card ${isCardFlipped && "card--flip"} ${isCardFlippedBack && "card--flip--back"}`}
+                className={`card ${isCardFlipped && "card--flip"} ${
+                    isFlipBackOver && "card--flip--back"
+                }`}
                 onClick={handleClick}
             >
-                {!visible && <img className={`card--back`} src={cardBack} />}
+                {!visible && (
+                    <img
+                        className={`card--back`}
+                        src={cardBack}
+                        draggable={false}
+                    />
+                )}
                 <div
                     className={`card-faceup ${
                         !isCardFlipped

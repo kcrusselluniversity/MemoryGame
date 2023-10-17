@@ -1,10 +1,13 @@
+// TODO: TIDY UP RESETTING TURNED OVER CARD USE EFFECTS INTO A SEPARATE UTIL 
+// FUNCTION
+
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
 import getPokemonFromId from "../utils/getPokemonFromId";
 import resetCards from "../utils/resetCards";
 import showCards from "../utils/showCards";
-import { resetCardFlipDuration } from "../constants";
+import { cardFlipDuration, resetCardFlipDuration } from "../constants";
 
 //  This hook is used to evaluate the game logic after each move is made
 export default function useGameLogic(
@@ -19,6 +22,7 @@ export default function useGameLogic(
     const [gameState, setGameState] = useAtom(gameStateAtom);
     const { mode: gameMode } = gameState;
     const totalCards = 2 * gameMode;
+    console.log(pokemonCards)
 
     useEffect(() => {
         switch (activeCardIds.length) {
@@ -60,6 +64,22 @@ export default function useGameLogic(
                             firstCardId,
                             secondCardId,
                         ]);
+                    } else {
+                        setPokemonCards(pokemonCards.map(pokemon => {
+                            if (pokemon.id == firstCardId || pokemon.id == secondCardId) {
+                                pokemon.isFlipBackOver = true;
+                            }
+                            return pokemon
+                        }))
+
+                        setTimeout(() => {
+                            setPokemonCards(pokemonCards.map(pokemon => {
+                                if (pokemon.id == firstCardId || pokemon.id == secondCardId) {
+                                    pokemon.isFlipBackOver = false;
+                                }
+                                return pokemon
+                            }))  
+                        }, cardFlipDuration)
                     }
 
                     setActiveCardIds([]);
