@@ -76,6 +76,7 @@ export default function Card({
                         className="card-faceup--image"
                         onLoad={handleOnLoad}
                         src={imgUrl}
+                        draggable={false}
                     />
                 </div>
             </div>

@@ -142,6 +142,11 @@ button:focus-visible {
   font-size: 1rem;
   margin: 6px 0px;
   color: black;
+  user-select: none;
+}
+
+.card img {
+  user-select: none;
 }
 
 /* LOADING SPINNER STYLING */
