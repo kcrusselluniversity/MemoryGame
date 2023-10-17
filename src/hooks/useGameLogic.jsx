@@ -4,6 +4,7 @@ import { gameStateAtom } from "../atoms/atoms";
 import getPokemonFromId from "../utils/getPokemonFromId";
 import resetCards from "../utils/resetCards";
 import showCards from "../utils/showCards";
+import { resetCardFlipDuration } from "../constants";
 
 //  This hook is used to evaluate the game logic after each move is made
 export default function useGameLogic(
@@ -40,7 +41,7 @@ export default function useGameLogic(
                     seenPokemonIds,
                     true
                 );
-
+                
                 setTimeout(() => {
                     const [firstCardId, secondCardId] = activeCardIds;
                     const firstPokemonName = getPokemonFromId(
@@ -62,7 +63,7 @@ export default function useGameLogic(
                     }
 
                     setActiveCardIds([]);
-                }, 300);
+                }, resetCardFlipDuration * 2);
                 break;
         }
     }, [activeCardIds]);

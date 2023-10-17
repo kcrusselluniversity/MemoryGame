@@ -24,6 +24,8 @@ LAYOUT, ETC */
   --card-back-scale-factor: 1.01;
   --pokemon-img-width: 130px;
   --border-color-hover: #646cff;
+
+  --card-flip-duration: 400ms;
 }
 
 #root {
@@ -93,6 +95,7 @@ button:focus-visible {
   background-color: white;
   border: none;
   border-radius: 8px;
+  transition: transform var(--card-flip-duration);
 }
 
 .card-faceup {
@@ -101,7 +104,16 @@ button:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  opacity: 0;
+  transition: opacity var(--card-flip-duration);
+}
 
+.card-faceup.card-faceup--visible {
+  opacity: 1;
+}
+
+.card-faceup--hidden {
+  display: none;
 }
 
 .card--back {
@@ -112,9 +124,18 @@ button:focus-visible {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .card-faceup--image {
   height: var(--pokemon-img-width);
   width: var(--pokemon-img-width);
+}
+
+.card--flip {
+  transform: rotateY(90deg);
+}
+
+.card--flip--back {
+  transform: rotateY(-90deg);
 }
 
 .card h3 {
@@ -258,10 +279,6 @@ input[type="radio"]:checked + .radio-indicator {
 }
 
 /* SECTION: UTIL CLASSES */
-.hidden {
-  display: none;
-}
-
 .noClick {
   pointer-events: none;
 }

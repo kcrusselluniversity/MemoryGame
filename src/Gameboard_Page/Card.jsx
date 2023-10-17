@@ -6,6 +6,8 @@ import Tilt from "react-parallax-tilt";
 import cardBack from "../resources/card_back_med.png";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
+import { useEffect, useState } from "react";
+import { cardFlipDuration } from "../constants";
 
 export default function Card({
     pokemon,
@@ -13,6 +15,8 @@ export default function Card({
     loadedImageCountRef,
 }) {
     const [gameState, setGameState] = useAtom(gameStateAtom);
+    const [isCardFlipped, setIsCardFlipped] = useState(null);
+    const [isCardFlippedBack, setIsCardFlippedBack] = useState(null);
     const { name, imgUrl, disabled, visible, id } = pokemon;
     const { activeCardIds, setActiveCardIds } = activeCardIdsState;
     const { mode } = gameState;
@@ -23,7 +27,23 @@ export default function Card({
 
         // Update active Cards
         setActiveCardIds([...activeCardIds, id]);
+
+        // Update Card flip status for animation to occur
+        setIsCardFlipped(true);
+
+        setTimeout(() => setIsCardFlipped(false), cardFlipDuration)
     }
+
+    // useEffect(() => {
+    //     if (isCardFlipped) {
+    //         if (activeCardIds.length == 2) {
+    //             setTimeout(() => {
+    //                 setIsCardFlippedBack(true)
+    //                 setTimeout(() => setIsCardFlipped(false), cardFlipDuration)
+    //             }, cardFlipDuration)
+    //         }
+    //     }
+    // }, [visible])
 
     const handleOnLoad = () => {
         loadedImageCountRef.current += 1;
@@ -33,20 +53,27 @@ export default function Card({
     };
 
     const tiltProps = {
-        tiltEnable: !disabled,
-        transitionSpeed: 600,
         perspective: 1000,
         scale: 1.02,
         tiltMaxAngleX: 0,
-        tiltMaxAngleY: 40,
+        tiltMaxAngleY: 30,
         style: { position: "relative" },
     };
 
     return (
         <Tilt {...tiltProps}>
-            <div className="card" onClick={handleClick}>
-                {!visible && <img className="card--back" src={cardBack} />}
-                <div className={visible ? "card-faceup" : "hidden"}>
+            <div
+                className={`card ${isCardFlipped && "card--flip"} ${isCardFlippedBack && "card--flip--back"}`}
+                onClick={handleClick}
+            >
+                {!visible && <img className={`card--back`} src={cardBack} />}
+                <div
+                    className={`card-faceup ${
+                        !isCardFlipped
+                            ? "card-faceup--visible"
+                            : "card-faceup--hidden"
+                    } `}
+                >
                     <h3>{name}</h3>
                     <img
                         className="card-faceup--image"
