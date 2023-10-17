@@ -83,7 +83,7 @@ export default function useGameLogic(
                     }
 
                     setActiveCardIds([]);
-                }, resetCardFlipDuration * 2);
+                }, resetCardFlipDuration);
                 break;
         }
     }, [activeCardIds]);

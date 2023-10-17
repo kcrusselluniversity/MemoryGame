@@ -1,7 +1,4 @@
-// TODO: USE FLIP-HORIZONTALLY PROP of TILT to have a nice animation
-// when the card flips over
-// TODO: Add the back of the card as an image in the assets and use that
-// for the facedown visible side
+// TODO: TIDY UP CARD CLASSNAMES USING THE CLASSNAME LIBRARY
 import Tilt from "react-parallax-tilt";
 import cardBack from "../resources/card_back_med.png";
 import { useAtom } from "jotai";
