@@ -116,6 +116,13 @@ button:focus-visible {
   gap: 1rem;
 }
 
+@media screen and (max-width: 600px) {
+  .PlayersFormPage,
+  .gameboardPage {
+    height: fit-content;
+  }
+}
+
 /* SECTION: PLAYERS FORM PAGE STYLING */
 form {
   display: flex;
