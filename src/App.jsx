@@ -12,16 +12,16 @@ function App() {
     const [highScore, setHighScore] = useState({ time: null, player: null });
 
     let page = null;
-    if (playersEntered === false) {
+    if (!playersEntered) {
         page = <PlayersFormPage />;
-    } else if (gameOver === true) {
+    } else if (gameOver) {
         page = (
             <GameOverPage
                 timerState={{ timer, setTimer }}
                 highScoreState={{ highScore, setHighScore }}
             />
         );
-    } else if (gameOver === false || restartGame === true) {
+    } else if (!gameOver || restartGame) {
         page = (
             <GameboardPage
                 timerState={{ timer, setTimer }}
