@@ -1,7 +1,7 @@
 import ModeButtons from "./modeButtons";
-import { EASY_MODE } from "./atoms/atoms";
+import { EASY_MODE } from "../atoms/atoms";
 import { useAtom } from "jotai";
-import { gameStateAtom } from "./atoms/atoms";
+import { gameStateAtom } from "../atoms/atoms";
 
 export default function PlayersFormPage() {
     const [gameState, setGameState] = useAtom(gameStateAtom);
@@ -29,8 +29,18 @@ export default function PlayersFormPage() {
         <main className="PlayersFormPage">
             <header>Memory Game</header>
             <form onSubmit={handleSubmit}>
-                <input required type="text" name="player1" placeholder="player 1" />
-                <input required type="text" name="player2" placeholder="player 2" />
+                <input
+                    required
+                    type="text"
+                    name="player1"
+                    placeholder="player 1"
+                />
+                <input
+                    required
+                    type="text"
+                    name="player2"
+                    placeholder="player 2"
+                />
                 <ModeButtons />
                 <button type="submit">Play</button>
             </form>

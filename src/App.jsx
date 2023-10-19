@@ -1,5 +1,5 @@
 import GameboardPage from "./Gameboard_Page";
-import PlayersFormPage from "./PlayersFormPage";
+import PlayersFormPage from "./PlayersForm_Page";
 import GameOverPage from "./GameOverPage";
 import { useState } from "react";
 import { useAtomValue } from "jotai";

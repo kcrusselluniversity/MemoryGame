@@ -1,4 +1,3 @@
-// TODO: TIDY UP CARD CLASSNAMES USING THE CLASSNAME LIBRARY
 import Tilt from "react-parallax-tilt";
 import cardBack from "../assets/card_back_med.png";
 import { useAtom } from "jotai";

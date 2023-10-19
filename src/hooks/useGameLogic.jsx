@@ -1,6 +1,3 @@
-// TODO: TIDY UP RESETTING TURNED OVER CARD USE EFFECTS INTO A SEPARATE UTIL 
-// FUNCTION
-
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
