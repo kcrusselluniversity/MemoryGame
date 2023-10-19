@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
 import { useState } from "react";
 import { cardFlipDuration } from "../constants";
+import classNames from "classnames";
 
 export default function Card({
     pokemon,
@@ -18,6 +19,16 @@ export default function Card({
     const { activeCardIds, setActiveCardIds } = activeCardIdsState;
     const { mode } = gameState;
     const totalImagesToLoad = mode * 2;
+
+    const cardFaceDown = classNames("card", {
+        "card--flip": isCardFlipped,
+        "card--flip--back": isFlipBackOver,
+    });
+
+    const cardFaceUp = classNames("card-faceup", {
+        "card-faceup--hidden": isCardFlipped,
+        "card-faceup--visible": !isCardFlipped,
+    });
 
     function handleClick() {
         if (disabled) return;
@@ -48,32 +59,23 @@ export default function Card({
 
     return (
         <Tilt {...tiltProps}>
-            <div
-                className={`card ${isCardFlipped && "card--flip"} ${
-                    isFlipBackOver && "card--flip--back"
-                }`}
-                onClick={handleClick}
-            >
+            <div className={cardFaceDown} onClick={handleClick}>
                 {!visible && (
                     <img
                         className={`card--back`}
                         src={cardBack}
                         draggable={false}
+                        alt="card-back"
                     />
                 )}
-                <div
-                    className={`card-faceup ${
-                        !isCardFlipped
-                            ? "card-faceup--visible"
-                            : "card-faceup--hidden"
-                    } `}
-                >
+                <div className={cardFaceUp}>
                     <h3>{name}</h3>
                     <img
                         className="card-faceup--image"
                         onLoad={handleOnLoad}
                         src={imgUrl}
                         draggable={false}
+                        alt={name}
                     />
                 </div>
             </div>
