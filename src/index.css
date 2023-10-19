@@ -16,16 +16,14 @@ LAYOUT, ETC */
   -webkit-text-size-adjust: 100%;
 
   --spinner-size: 4rem;
-  --grid-width: 220px;
-  --grid-height: 220px;
 
   --card-width: 128px;
   --card-aspect-ratio: 1.40;
   --card-back-scale-factor: 1.01;
   --pokemon-img-width: 130px;
-  --border-color-hover: #646cff;
-
   --card-flip-duration: 400ms;
+ 
+  --border-color-hover: #646cff;
 }
 
 #root {
