@@ -1,4 +1,4 @@
-import ModeButtons from "./modeButtons";
+import ModeButtons from "./ModeButtons";
 import { EASY_MODE } from "../atoms/atoms";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "../atoms/atoms";
