@@ -100,7 +100,7 @@ button:focus-visible {
 
 .gameboardPage {
   display: grid;
-  grid-template-rows: 60px repeat(4,40px) auto;
+  grid-template-rows: 50px repeat(5,40px) auto;
   place-items: center;
 }
 
@@ -147,26 +147,28 @@ input {
   gap: 1.5rem;
 }
 
-.modeButtonsContainer > * {
+.modeButton {
   font-size: 1.2rem;
-  padding: 2px 12px;
-  transition: background-color 0.5s;
-  
 }
 
-.modeButtonsContainer > *:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: #646cff;
-  cursor:pointer;
+.modeButton > input {
+  width: 0;
+  height: 0;
+  position: absolute;
 }
 
-input[type="radio"] {
-  display: none;
+.modeButton > label {
+  padding: 4px 12px;
 }
 
-input[type="radio"]:checked + .radio-indicator {
-  color: #9ca1ff;
-  font-weight: 500;
+input[type="radio"]:checked + label {
+  font-weight: 600;
+  outline: 4px auto var(--border-color-hover);
+}
+
+label:hover {
+  outline: 4px auto var(--border-color-hover);
+  cursor: pointer;
 }
 
 /* SECTION: GAMEBOARD PAGE STYING */
