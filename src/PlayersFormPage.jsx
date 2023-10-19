@@ -1,4 +1,3 @@
-// TODO: FIX MODE BUTTONS NOT BEING TABBED OVER IN FORM
 import ModeButtons from "./modeButtons";
 import { EASY_MODE } from "./atoms/atoms";
 import { useAtom } from "jotai";
@@ -30,10 +29,8 @@ export default function PlayersFormPage() {
         <main className="PlayersFormPage">
             <header>Memory Game</header>
             <form onSubmit={handleSubmit}>
-                {/* Add back required when done testing */}
-                {/* <input required type="text" name="player1" placeholder="player 1" /> */}
-                <input type="text" name="player1" placeholder="player 1" />
-                <input type="text" name="player2" placeholder="player 2" />
+                <input required type="text" name="player1" placeholder="player 1" />
+                <input required type="text" name="player2" placeholder="player 2" />
                 <ModeButtons />
                 <button type="submit">Play</button>
             </form>

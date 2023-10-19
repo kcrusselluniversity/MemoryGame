@@ -34,12 +34,13 @@ function GameboardPage({ timerState, highScore }) {
 
     return (
         <main className="gameboardPage">
-            <LoadingSpinner />
-            {isLoaded && (
+            {isLoaded ? (
                 <>
                     <PlayersDisplay />
                     <HighScoreDisplay highScore={highScore} />
                 </>
+            ) : (
+                <LoadingSpinner />
             )}
             <Gameboard
                 pokemonCardsState={{ pokemonCards, setPokemonCards }}

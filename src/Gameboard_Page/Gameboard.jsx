@@ -1,5 +1,3 @@
-// FIX BUG WHERE YOU CAN CLICK ON A FACEUP CARD AND IT ACCEPTS
-// IT AS A CARD
 import classNames from "classnames";
 import Card from "./Card";
 import StartButton from "./StartButton";
@@ -22,8 +20,8 @@ export default function Gameboard({
 
     const classList = classNames("gameboard", {
         displayNone: !gameState.isLoaded,
-        medModeMaxWidth: gameState.mode == MEDIUM_MODE,
-        hardModeMaxWidth: gameState.mode == HARD_MODE,
+        medMode: gameState.mode == MEDIUM_MODE,
+        hardMode: gameState.mode == HARD_MODE,
     });
 
     function handleStart() {
