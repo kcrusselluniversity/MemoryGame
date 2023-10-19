@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import { gameStateAtom } from "./atoms/atoms";
 import stopWatch from "./utils/stopwatch";
 
-function GameOver({ timerState, highScoreState }) {
+function GameOverPage({ timerState, highScoreState }) {
     const [gameState, setGameState] = useAtom(gameStateAtom);
     const { player1, player2, currentPlayer } = gameState;
     const { timer, setTimer } = timerState;
@@ -38,4 +38,4 @@ function GameOver({ timerState, highScoreState }) {
     );
 }
 
-export default GameOver;
+export default GameOverPage;

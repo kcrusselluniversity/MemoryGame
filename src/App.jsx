@@ -1,6 +1,6 @@
 import GameboardPage from "./Gameboard_Page";
 import PlayersForm from "./PlayersForm";
-import GameOver from "./GameOver";
+import GameOverPage from "./GameOverPage";
 import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { gameStateAtom } from "./atoms/atoms";
@@ -16,7 +16,7 @@ function App() {
         page = <PlayersForm />;
     } else if (gameOver === true) {
         page = (
-            <GameOver
+            <GameOverPage
                 timerState={{ timer, setTimer }}
                 highScoreState={{ highScore, setHighScore }}
             />
