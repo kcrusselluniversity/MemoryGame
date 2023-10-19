@@ -166,6 +166,12 @@ label:hover {
   cursor: pointer;
 }
 
+@media screen and (max-width: 600px) {
+  .modeButton > input {
+    visibility: hidden;
+  }  
+}
+
 /* SECTION: GAMEBOARD PAGE STYING */
 .gameboard {
   position: relative;
