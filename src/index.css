@@ -37,15 +37,6 @@ LAYOUT, ETC */
   padding: 0px;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 header {
   font-size: 3.5rem;
   margin: 30px 0px;
@@ -85,9 +76,10 @@ button:hover {
   border-color: var(--border-color-hover)
 }
 
+input:focus,
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto var(--border-color-hover);
 }
 
 @media screen and (max-width: 600px) {
@@ -98,15 +90,23 @@ button:focus-visible {
 }
 
 /* SECTION: PAGE LAYOUT */
+.PlayersFormPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .gameboardPage {
   display: grid;
-  grid-template-rows: repeat(5,40px) auto;
+  grid-template-rows: 60px repeat(4,40px) auto;
   place-items: center;
 }
 
 @media screen and (max-width: 600px) {
   .gameboardPage {
-    grid-template-rows: 20px repeat(3,60px) auto; 
+    grid-template-rows: 30px repeat(3,60px) auto; 
   }
 }
 
@@ -117,6 +117,100 @@ button:focus-visible {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+/* SECTION: PLAYERS FORM PAGE STYLING */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 64px;
+  grid-column: 1;
+  grid-row: 3;
+}
+
+form > input,
+form > button,
+form label {
+  border-radius: 6px;
+  border: 1px solid white;
+}
+
+input {
+  font-size: 1.8rem;
+  padding: 8px;
+}
+
+.modeButtonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.modeButtonsContainer > * {
+  font-size: 1.2rem;
+  padding: 2px 12px;
+  transition: background-color 0.5s;
+  
+}
+
+.modeButtonsContainer > *:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #646cff;
+  cursor:pointer;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked + .radio-indicator {
+  color: #9ca1ff;
+  font-weight: 500;
+}
+
+/* SECTION: GAMEBOARD PAGE STYING */
+.gameboard {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 1.5rem;
+  width: 80vw;
+  justify-content: center;
+  grid-row-start: 6;
+  align-self: start;
+  max-width: 700px;
+  margin-bottom: 1rem;
+}
+
+.startButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  border: 4px solid green;
+  box-shadow: 0px 0px 4px 8px rgba(0,0,0, 0.3);
+  z-index: 1000;
+}
+
+.currentPlayer {
+  box-shadow: 0px 0px 5px 2px white;
+  padding: 4px 16px;
+  border-radius: 8px;
+}
+
+.highScoreDisplay { 
+  grid-row-start: 4;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .gameboard {
+    gap: 1rem;
+    width: 100%;
+  }
 }
 
 /* SECTION: CARD COMPONENT STYLING */
@@ -218,96 +312,6 @@ button:focus-visible {
   }
 }
 
-/* SECTION: PLAYERS FORM PAGE STYLING */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  margin-top: 64px;
-  grid-column: 1;
-  grid-row: 3;
-}
-
-input {
-  font-size: 1.8rem;
-  padding: 8px;
-
-}
-
-.modeButtonsContainer {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.modeButtonsContainer > * {
-  font-size: 1.2rem;
-  padding: 2px 12px;
-  border: 1px solid white;
-  border-radius: 6px;
-  transition: background-color 0.5s;
-  
-}
-
-.modeButtonsContainer > *:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: #646cff;
-  cursor:pointer;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-input[type="radio"]:checked + .radio-indicator {
-  color: #9ca1ff;
-  font-weight: 500;
-}
-
-/* SECTION: GAMEBOARD PAGE STYING */
-.gameboard {
-  display: flex;
-  position: relative;
-  flex-wrap: wrap;
-  align-content: center;
-  gap: 1.5rem;
-  width: 80vw;
-  justify-content: center;
-  grid-row-start: 6;
-  align-self: start;
-  max-width: 700px;
-  margin-bottom: 1rem;
-}
-
-.startButton {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
-  border: 4px solid green;
-  box-shadow: 0px 0px 4px 8px rgba(0,0,0, 0.3);
-  z-index: 1000;
-}
-
-.currentPlayer {
-  box-shadow: 0px 0px 5px 2px white;
-  padding: 4px 16px;
-  border-radius: 8px;
-}
-
-.highScoreDisplay { 
-  grid-row-start: 4;
-  font-size: 1.2rem;
-}
-
-@media screen and (max-width: 600px) {
-  .gameboard {
-    gap: 1rem;
-    width: 100%;
-  }
-}
-
 /* SECTION: PLAYER CONTAINER COMPONENT STYLING */
 .playerContainer {
   display: flex;
@@ -329,9 +333,20 @@ input[type="radio"]:checked + .radio-indicator {
 @media screen and (max-width: 600px) {
   .playerContainer {
     flex-direction: column;
-    gap: 24px;
+    gap: 0.5rem;
     grid-row-start: 2;
     align-self: start;
+  }
+
+  .playerContainer h2 {
+    font-size: 1.2rem;
+    margin: 4px 0px;
+  }
+
+  .highScoreDisplay {
+    font-size: 1rem;
+    align-self: start;
+    margin-top: 0px;
   }
 
   .currentPlayer {

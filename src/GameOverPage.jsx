@@ -30,7 +30,7 @@ function GameOverPage({ timerState, highScoreState }) {
     return (
         <main className="gameOverPage">
             <h1>{currentPlayer}</h1>
-            <h1>{timeString} seconds</h1>
+            <h2>{timeString} seconds</h2>
             <button className="restartButton" onClick={handleRestart}>
                 Restart
             </button>

@@ -4,7 +4,7 @@ import { EASY_MODE } from "./atoms/atoms";
 import { useAtom } from "jotai";
 import { gameStateAtom } from "./atoms/atoms";
 
-export default function PlayersForm() {
+export default function PlayersFormPage() {
     const [gameState, setGameState] = useAtom(gameStateAtom);
     function handleSubmit(e) {
         e.preventDefault();
@@ -27,7 +27,7 @@ export default function PlayersForm() {
     }
 
     return (
-        <>
+        <main className="PlayersFormPage">
             <header>Memory Game</header>
             <form onSubmit={handleSubmit}>
                 {/* Add back required when done testing */}
@@ -37,6 +37,6 @@ export default function PlayersForm() {
                 <ModeButtons />
                 <button type="submit">Play</button>
             </form>
-        </>
+        </main>
     );
 }

@@ -1,5 +1,5 @@
 import GameboardPage from "./Gameboard_Page";
-import PlayersForm from "./PlayersForm";
+import PlayersFormPage from "./PlayersFormPage";
 import GameOverPage from "./GameOverPage";
 import { useState } from "react";
 import { useAtomValue } from "jotai";
@@ -13,7 +13,7 @@ function App() {
 
     let page = null;
     if (playersEntered === false) {
-        page = <PlayersForm />;
+        page = <PlayersFormPage />;
     } else if (gameOver === true) {
         page = (
             <GameOverPage
