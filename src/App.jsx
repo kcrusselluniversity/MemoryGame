@@ -29,11 +29,7 @@ function App() {
             />
         );
     }
-    return (
-        <>
-            {page}
-        </>
-    );
+    return page;
 }
 
 export default App;
