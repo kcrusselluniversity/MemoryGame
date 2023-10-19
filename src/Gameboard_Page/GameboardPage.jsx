@@ -33,7 +33,7 @@ function GameboardPage({ timerState, highScore }) {
     );
 
     return (
-        <>
+        <main className="gameboardPage">
             <LoadingSpinner />
             {isLoaded && (
                 <>
@@ -46,7 +46,7 @@ function GameboardPage({ timerState, highScore }) {
                 activeCardIdsState={{ activeCardIds, setActiveCardIds }}
                 timerState={{ timer, setTimer }}
             />
-        </>
+        </main>
     );
 }
 

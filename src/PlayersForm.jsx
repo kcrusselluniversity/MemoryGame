@@ -27,13 +27,16 @@ export default function PlayersForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            {/* Add back required when done testing */}
-            {/* <input required type="text" name="player1" placeholder="player 1" /> */}
-            <input type="text" name="player1" placeholder="player 1" />
-            <input type="text" name="player2" placeholder="player 2" />
-            <ModeButtons />
-            <button type="submit">Play</button>
-        </form>
+        <>
+            <header>Memory Game</header>
+            <form onSubmit={handleSubmit}>
+                {/* Add back required when done testing */}
+                {/* <input required type="text" name="player1" placeholder="player 1" /> */}
+                <input type="text" name="player1" placeholder="player 1" />
+                <input type="text" name="player2" placeholder="player 2" />
+                <ModeButtons />
+                <button type="submit">Play</button>
+            </form>
+        </>
     );
 }
