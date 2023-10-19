@@ -20,7 +20,7 @@ LAYOUT, ETC */
   --card-width: 128px;
   --card-aspect-ratio: 1.40;
   --card-back-scale-factor: 1.01;
-  --pokemon-img-width: 130px;
+  --pokemon-img-width: var(--card-width);
   --card-flip-duration: 400ms;
  
   --border-color-hover: #646cff;
@@ -91,6 +91,13 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media screen and (max-width: 600px) {
+  #root {
+    margin: 0px 5%;
+  }
+  
 }
 
 /* SECTION: PAGE LAYOUT */
@@ -165,6 +172,12 @@ button:focus-visible {
 
 .card img {
   user-select: none;
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    --card-width: 98px;  
+  }  
 }
 
 /* SECTION: LOADING SPINNER STYLING */
@@ -286,6 +299,13 @@ input[type="radio"]:checked + .radio-indicator {
   margin-top: 4rem;
 }
 
+@media screen and (max-width: 600px) {
+  .gameboard {
+    gap: 1rem;
+    width: 100%;
+  }
+}
+
 /* SECTION: PLAYER CONTAINER COMPONENT STYLING */
 .playerContainer {
   display: flex;
@@ -319,6 +339,10 @@ input[type="radio"]:checked + .radio-indicator {
 
   .currentPlayer, h2   {
     margin: 4px 0px;
+  }
+
+  .hardModeMaxWidth {
+    max-width: 100%;
   }
 }
 
