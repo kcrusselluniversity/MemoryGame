@@ -27,6 +27,9 @@ LAYOUT, ETC */
 }
 
 #root {
+  margin: 0 auto;
+  text-align: center;
+  
   display: grid;
   grid-template-rows: 100px 65px 65px auto;
   height: 100%;

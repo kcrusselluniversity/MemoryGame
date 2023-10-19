@@ -22,7 +22,6 @@ export default function useGameLogic(
     const [gameState, setGameState] = useAtom(gameStateAtom);
     const { mode: gameMode } = gameState;
     const totalCards = 2 * gameMode;
-    console.log(pokemonCards)
 
     useEffect(() => {
         switch (activeCardIds.length) {

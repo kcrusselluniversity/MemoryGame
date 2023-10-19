@@ -4,7 +4,6 @@ import GameOver from "./GameOver";
 import { useState } from "react";
 import { useAtomValue } from "jotai";
 import { gameStateAtom } from "./atoms/atoms";
-import "./App.css";
 
 function App() {
     const gameState = useAtomValue(gameStateAtom);
