@@ -22,6 +22,7 @@ LAYOUT, ETC */
   --card-back-scale-factor: 1.01;
   --pokemon-img-width: var(--card-width);
   --card-flip-duration: 400ms;
+  --card-text-scaling-factor: 0.8;
  
   --border-color-hover: #646cff;
 }
@@ -57,10 +58,6 @@ header, h1 {
 h1 {
   font-size: 3.2em;
   margin: 0px;
-}
-
-h2 {
-  font-size: 1rem;
 }
 
 body {
@@ -111,6 +108,15 @@ button:focus-visible {
   .gameboardPage {
     grid-template-rows: 20px repeat(3,60px) auto; 
   }
+}
+
+.gameOverPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* SECTION: CARD COMPONENT STYLING */
@@ -164,10 +170,13 @@ button:focus-visible {
 }
 
 .card h3 {
+  width: calc(var(--card-width)*var(--card-text-scaling-factor));
   font-size: 1rem;
   margin: 6px 0px;
   color: black;
   user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card img {
@@ -289,14 +298,7 @@ input[type="radio"]:checked + .radio-indicator {
 
 .highScoreDisplay { 
   grid-row-start: 4;
-  font-size: 0.9rem;
-}
-
-.restartButton {
-  grid-row-start: 5;
-  font-size: 2rem;
-  align-self: start;
-  margin-top: 4rem;
+  font-size: 1.2rem;
 }
 
 @media screen and (max-width: 600px) {
@@ -324,11 +326,6 @@ input[type="radio"]:checked + .radio-indicator {
   grid-row-start: 5;
 }
 
-.playerGametime {
-  grid-row-start: 3;
-  font-size: 2rem;
-}
-
 @media screen and (max-width: 600px) {
   .playerContainer {
     flex-direction: column;
@@ -337,13 +334,19 @@ input[type="radio"]:checked + .radio-indicator {
     align-self: start;
   }
 
-  .currentPlayer, h2   {
+  .currentPlayer {
     margin: 4px 0px;
   }
 
   .hardModeMaxWidth {
     max-width: 100%;
   }
+}
+
+/* SECTION: GAME OVER PAGE STYLING */
+.restartButton {
+  font-size: 2rem;
+  margin-top: 4rem;
 }
 
 /* SECTION: UTIL CLASSES */

@@ -28,14 +28,13 @@ function GameOver({ timerState, highScoreState }) {
     }
 
     return (
-        <>
-            <h1 className="playerGametime">
-                {currentPlayer}: {timeString} seconds
-            </h1>
+        <main className="gameOverPage">
+            <h1>{currentPlayer}</h1>
+            <h1>{timeString} seconds</h1>
             <button className="restartButton" onClick={handleRestart}>
                 Restart
             </button>
-        </>
+        </main>
     );
 }
 
