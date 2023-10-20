@@ -184,9 +184,8 @@ label:hover {
 }
 
 @media screen and (max-width: 390px) {
-  .modeButtonsContainer {
-    flex-direction: column;
-    gap: 1rem;
+  .modeButton {
+    font-size: 0.8rem;
   }
 } 
 
