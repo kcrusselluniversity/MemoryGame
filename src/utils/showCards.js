@@ -1,6 +1,6 @@
 // This function shows all cards except for the active and seen cards,
-// The isDisabled parameter allows you to control whether the remaining cards are
-// disabled or enabled
+// The isDisabled parameter allows you to control whether the remaining 
+// cards are disabled or enabled
 function showCards(
     pokemonCards,
     setPokemonCards,

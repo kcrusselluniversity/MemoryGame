@@ -1,3 +1,5 @@
+// This async function fetches the desired data of a pokemon (based on a given 
+// id) from the pokeapi.co API
 export default async function fetchPokemon(id) {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
 

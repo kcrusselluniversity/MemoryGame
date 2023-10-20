@@ -6,6 +6,7 @@ import fetchPokemon from "../utils/fetchPokemon";
 
 const NUMBER_OF_POKEMON = 700;
 
+// This hook is used to generate an array of pokemon cards
 export default function usePokemonCards(cardQuantity) {
     const [pokemonCards, setPokemonCards] = useState([]);
 

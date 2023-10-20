@@ -8,8 +8,8 @@ import { gameStateAtom } from "./atoms/atoms";
 function App() {
     const gameState = useAtomValue(gameStateAtom);
     const { playersEntered, gameOver, restartGame } = gameState;
-    const [timer, setTimer] = useState([]);
     const [highScore, setHighScore] = useState({ time: null, player: null });
+    const [timer, setTimer] = useState([]);
 
     let page = null;
     if (!playersEntered) {

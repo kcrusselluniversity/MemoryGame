@@ -5,8 +5,8 @@ import stopWatch from "./utils/stopwatch";
 function GameOverPage({ timerState, highScoreState }) {
     const [gameState, setGameState] = useAtom(gameStateAtom);
     const { player1, player2, currentPlayer } = gameState;
-    const { timer, setTimer } = timerState;
     const { highScore, setHighScore } = highScoreState;
+    const { timer, setTimer } = timerState;
 
     const timeString = stopWatch(timer[1], timer[0]);
     const timeInt = parseFloat(timeString);
