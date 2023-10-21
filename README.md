@@ -59,23 +59,23 @@ During the project, I discovered that the journey of writing good code mirrors t
 
 <b>Key Improvements:</b>
 
--   **Variable Names**:
+-   *Variable Names*:
 
     -   Refined variable names to improve clarity.
 
--   **Magic Numbers**:
+-   *Magic Numbers*:
 
     -   Replaced magic numbers with descriptive constants.
 
--   **Function Refactoring**:
+-   *Function Refactoring*:
 
     -   Refactor functions with the <i>Single Responsibility Principle</i> in mind.
 
--   **Code Reusability**:
+-   *Code Reusability*:
 
     -   Centralized repetitive logic into reusable functions.
 
--   **Component Breakdown**:
+-   *Component Breakdown*:
     -   Broke down larger subcomponents for better granularity and modularity.
 
 ## Improvements and Future Features
