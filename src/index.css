@@ -173,6 +173,10 @@ label:hover {
   cursor: pointer;
 }
 
+.PlayersFormPage__submit {
+  color: white;
+}
+
 @media screen and (max-width: 600px) {
   .modeButton > input {
     visibility: hidden;

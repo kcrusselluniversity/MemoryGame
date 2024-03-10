@@ -42,7 +42,7 @@ export default function PlayersFormPage() {
                     placeholder="player 2"
                 />
                 <ModeButtons />
-                <button type="submit">Play</button>
+                <button type="submit" className="PlayersFormPage__submit">Play</button>
             </form>
         </main>
     );
