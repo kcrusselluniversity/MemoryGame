@@ -4,8 +4,6 @@ This game is the classic memory card game 'Matching pairs' played using Pokemon.
 
 The game allows for two players. Each player tries to match pairs of cards in the fastest time possible.
 
-**Website is live <a href="https://calm-crumble-76637e.netlify.app/">here</a>**
-
 ## Screenshots
 
 ### Gameplay:
